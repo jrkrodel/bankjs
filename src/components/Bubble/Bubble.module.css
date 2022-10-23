@@ -1,0 +1,48 @@
+.bubbleMed {
+    color: white;
+    background-color: #0C141D;
+    font-size: 48px;
+    width: 45%;
+    height: 20rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    min-width: 20rem;
+    margin: 1rem;
+}
+
+.bubbleSml {
+    color: white;
+    background-color: #0C141D;
+    font-size: 48px;
+    width: 30%;
+    height: 20rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    min-width: 20rem;
+    margin: 1rem;
+}
+
+.bubbleLrg {
+    color: white;
+    background-color: #0C141D;
+    font-size: 48px;
+    width: 60%;
+    height: 20rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    min-width: 20rem;
+    margin: 1rem;
+}
+

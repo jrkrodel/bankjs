@@ -1,0 +1,18 @@
+.container {
+    width: 90%;
+    margin: 0 auto;
+    padding: 5rem 7rem 5rem 7rem;
+}
+
+.bubbleRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+@media screen and (max-width: 800px) {
+    .bubbleRow{
+        flex-direction: column;
+    }
+
+}

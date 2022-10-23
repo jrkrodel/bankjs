@@ -1,0 +1,46 @@
+.nav {
+    width: 100%;
+    background-color: #305375;
+    padding: 1rem 0 1rem 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+}
+
+.navLink {
+    display: flex;
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    margin-right: 3%;
+}
+
+
+.logo {
+    color: white;
+    font-size: 48px;
+    margin: 0 3rem 0 2rem;
+}
+.icon {
+    margin-right: 1rem;
+}
+
+.mobileNav {
+    color: white;
+    font-size: 36Px;
+    display: none;
+}
+
+
+@media screen and (max-width: 1000px) {
+  .navLink {
+    display: none;
+  }
+  .mobileNav {
+    display: block;
+    position: absolute;
+    right: 5%;
+    top: 30%;
+  }
+}

@@ -1,0 +1,54 @@
+.container {
+    width: 30%;
+    background-color: #1F3A55;
+    min-height: 30rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+}
+
+.boxNav {
+    width: 100%;
+    margin-bottom: 3rem;
+}
+
+.boxForm {
+    padding: 0 5rem 0 5rem;
+}
+
+.container h1 {
+    color: white;
+}
+
+input, label {
+    width: 50%;
+    color: white;
+    font-family: Raleway;
+}
+
+input {
+    color: black;
+}
+
+input {
+    border-radius: 5px;
+    border: none;
+}
+
+.inputField {
+    display: flex;
+}
+
+.boxLink {
+    width: 50%;
+    margin: 0 0 2rem 0;
+    border-radius: 0;
+}
+
+.boxLinkSelected {
+    width: 50%;
+    margin: 0 0 2rem 0;
+    border-radius: 0;
+    background-color: #1F3A55;
+}
