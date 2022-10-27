@@ -6,12 +6,15 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useUserAuth } from "./context/userAuthContext";
 import Home from "./pages/home/Home";
 import LoginScreen from "./pages/loginScreen/LoginScreen";
+import "./app.css";
 
 function App() {
   const { user } = useUserAuth();
+  const { userFunds } = useUserAuth();
+
   return (
     <BrowserRouter>
-      {user && <Nav />}
+      {user && <Nav funds={userFunds} />}
       <Routes>
         <Route exact path="/" element={<LoginScreen />} />
         <Route

@@ -6,12 +6,13 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth, db } from "../firebase/firebaseConfig";
-import { doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc, updateDoc, onSnapshot } from "firebase/firestore";
 
 const userAuthContext = createContext();
 
 export function UserAuthContextProvider({ children }) {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
+  const [userFunds, setUserFunds] = useState(0);
 
   //Add user data to firestore
   const addUser = async (email) => {
@@ -20,6 +21,7 @@ export function UserAuthContextProvider({ children }) {
         email: email,
         budgets: [],
         transactions: [],
+        funds: 0,
       });
     } catch (e) {
       console.log(e);
@@ -61,8 +63,16 @@ export function UserAuthContextProvider({ children }) {
     };
   }, []);
 
+  if (user) {
+    const unsub = onSnapshot(doc(db, "users", auth.currentUser.uid), (doc) => {
+      setUserFunds(doc.data().funds.toFixed(2));
+    });
+  }
+
   return (
-    <userAuthContext.Provider value={{ user, login, signUp, logout }}>
+    <userAuthContext.Provider
+      value={{ user, login, signUp, logout, userFunds }}
+    >
       {children}
     </userAuthContext.Provider>
   );
@@ -75,21 +85,24 @@ export function useUserAuth() {
 //Update doc
 export async function makeDeposit(deposit) {
   const userRef = doc(db, "users", auth.currentUser.uid);
-  console.log(auth.currentUser.uid);
   const userSnap = await getDoc(userRef);
+  const d = Number(deposit);
   if (userSnap.exists()) {
     let date = new Date();
     let currentDate =
       date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
     let currentTranscations = userSnap.data().transactions;
+    let currentFunds = userSnap.data().funds;
+    let updatedFunds = currentFunds + d;
     let recentDesposit = {
       date: currentDate,
-      deposit: deposit,
+      amount: deposit,
       type: "deposit",
     };
-    let newTranscations = [...currentTranscations, recentDesposit];
+    let newTranscations = [recentDesposit, ...currentTranscations];
     await updateDoc(userRef, {
       transactions: newTranscations,
+      funds: updatedFunds,
     });
   } else {
     console.log("No such document!");
@@ -99,11 +112,17 @@ export async function makeDeposit(deposit) {
 export async function makePayment(payment) {
   const userRef = doc(db, "users", auth.currentUser.uid);
   const userSnap = await getDoc(userRef);
+  const p = Number(payment.amount);
+
   if (userSnap.exists()) {
     let currentTranscations = userSnap.data().transactions;
-    let newTranscations = [...currentTranscations, payment];
+    let currentFunds = userSnap.data().funds;
+    let newFunds = currentFunds - p;
+    let newTranscations = [payment, ...currentTranscations];
+
     await updateDoc(userRef, {
       transactions: newTranscations,
+      funds: newFunds,
     });
   } else {
     console.log("No such document!");
@@ -117,17 +136,6 @@ export async function getTransactions() {
   if (userSnap.exists()) {
     return user.transactions;
   } else {
+    console.log("No such document!");
   }
-
-  // let currentTranscations = userSnap.data().transactions;
-  // console.log(currentTranscations);
-  // console.log(doc(db, "users", auth.currentUser.uid));
-  // const userRef = doc(db, "users", auth.currentUser.uid);
-  // const userSnap = await getDoc(userRef);
-  // if (userSnap.exists()) {
-  //   let currentTranscations = userSnap.data().transactions;
-  //   console.log(currentTranscations);
-  // } else {
-  //   console.log("No such document!");
-  // }
 }

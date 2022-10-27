@@ -3,7 +3,7 @@ import TransactionList from "../../components/TransactionsList/TransactionList";
 import TransactionSearch from "../../components/TransactionSearch/TransactionSearch";
 import styles from "./transcations.module.css";
 import { getTransactions } from "../../context/userAuthContext";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 function Transactions() {
   const [transactions, setTransactions] = useState();
@@ -14,12 +14,12 @@ function Transactions() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.transactionsContainer}>
       <PaymentBox />
-      <div>
+      <div className={styles.transactionBar}>
         <TransactionSearch />
+        <button onClick={getTrans}>Get Transactions</button>
         <TransactionList transactions={transactions} />
-        <button onClick={getTrans}></button>
       </div>
     </div>
   );

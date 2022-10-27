@@ -9,7 +9,7 @@ function Home() {
         <Bubble title={"Profile"} size={"med"} />
       </div>
       <div className={styles.bubbleRow}>
-        <Bubble title={"Recent Payment / Deposits"} size={"lrg"} />
+        <Bubble title={"Transactions"} size={"lrg"} />
         <Bubble title={"Up/Down"} size={"sml"} />
       </div>
     </div>

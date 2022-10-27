@@ -60,7 +60,7 @@ const PaymentBox = () => {
             </div>
             <div className={styles.inputField}>
               <label>Amount</label>
-              <input type="text" name="amount" onChange={handleChange} />
+              <input type="number" name="amount" onChange={handleChange} />
             </div>
             <div className={styles.inputField}>
               <label>Category</label>

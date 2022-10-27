@@ -1,10 +1,34 @@
+import styles from "./TransactionSearch.module.css";
+
 const TransactionSearch = () => {
   return (
     <div>
-      <input type="text" placeholder="Search" />
-      <input type="text" placeholder="Sort By:" />
-      <input type="text" placeholder="Category" />
-      <input type="text" placeholder="Payments & Deposits" />
+      <h1 className={styles.header}>Search Payments & Deposits</h1>
+      <div className={styles.formContainer}>
+        <input
+          className={styles.searchInput}
+          type="text"
+          placeholder="Search"
+        />
+        <input
+          className={styles.searchInput}
+          type="text"
+          placeholder="Sort By:"
+        />
+      </div>
+      <div className={styles.formContainer}>
+        <input
+          type="text"
+          className={styles.searchInput}
+          placeholder="Category"
+        />
+        <input
+          type="text"
+          className={styles.searchInput}
+          placeholder="Payments & Deposits"
+        />
+      </div>
+      <h3 className={styles.results}>Results:</h3>
     </div>
   );
 };
