@@ -1,0 +1,84 @@
+.createBudgetContainer {
+  width: 80%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-direction: column;
+  margin: 3rem auto 0 auto;
+}
+
+.budgetForm {
+  width: 80%;
+  margin: 0 auto;
+  background-color: #0c141d;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 4rem 2rem 4rem;
+  margin-bottom: 2rem;
+}
+
+.budgetForm .inputContainer {
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.inputForm {
+  margin-right: 2rem;
+  width: 100%;
+}
+
+.inputContainer input {
+  margin-right: 2rem;
+  width: 100%;
+}
+
+.inputContainer label {
+  color: white;
+  width: 100%;
+  margin-bottom: 0.3rem;
+}
+
+.budgetForm button {
+  margin-bottom: 0.5rem;
+}
+
+.cancelButton {
+  background-color: #c43333;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+.buttonLink {
+  width: 100%;
+  cursor: pointer;
+}
+
+.createButton {
+  margin: 1rem auto;
+  cursor: pointer;
+  background-color: #305375;
+  border: none;
+  color: white;
+  padding: 1rem;
+  border-radius: 15px;
+  width: 100%;
+  font-size: 16px;
+  font-family: Raleway;
+  text-align: center;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 800px) {
+  .inputContainer {
+    flex-direction: column;
+  }
+
+  .inputForm {
+    margin-right: 0;
+  }
+}

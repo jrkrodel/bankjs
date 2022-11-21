@@ -1,0 +1,123 @@
+.budgetData {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.budgetContainer {
+  width: 80%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: stretch;
+
+  margin: 3rem auto 0 auto;
+}
+.graph {
+  width: 100%;
+  min-height: 30rem;
+  padding: 2rem;
+  position: relative;
+}
+
+.budgetDisplay {
+  width: 100%;
+  background-color: #0c141d;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  border-radius: 20px;
+}
+
+.budgetBar {
+  justify-content: space-around;
+  align-items: flex-end;
+  display: block;
+  width: 20px;
+}
+
+.budgetSVGContainer {
+  display: flex;
+  align-items: space-around;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.budgetGraphContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  width: 100%;
+  height: 20rem;
+  background-color: grey;
+}
+
+.budgetDisplayHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.budgetDisplayHeaderText {
+  margin: 0;
+  color: white;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.editBudget {
+  min-width: 10rem;
+  margin: 0 1rem 0 0;
+  background-color: #305375;
+  border: none;
+  color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-family: Raleway;
+  text-decoration: none;
+  text-align: center;
+}
+
+.budgetButtons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+.deleteBudget {
+  min-width: 10rem;
+  background-color: #c43333;
+  border: none;
+  color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-family: Raleway;
+  text-decoration: none;
+  text-align: center;
+}
+
+.backArrow {
+  margin-right: 2rem;
+  text-decoration: none;
+  color: white;
+}
+
+@media screen and (max-width: 1000px) {
+  .budgetDisplayHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .budgetDisplayHeaderText {
+    margin-bottom: 2rem;
+  }
+}

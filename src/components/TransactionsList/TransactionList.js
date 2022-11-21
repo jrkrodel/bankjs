@@ -1,16 +1,14 @@
 import styles from "./TransactionList.module.css";
 
 const TransactionList = ({ transactions }) => {
-  console.log(transactions);
   let allTransactions;
   if (transactions) {
     allTransactions = transactions.map((transaction, index) => {
-      console.log(transaction);
       if (transaction.type === "deposit") {
         return (
           <div
             className={
-              index % 2 == 0 ? styles.transaction : styles.transactionEven
+              index % 2 === 0 ? styles.transaction : styles.transactionEven
             }
             key={index}
           >
@@ -27,7 +25,7 @@ const TransactionList = ({ transactions }) => {
         return (
           <div
             className={
-              index % 2 == 0 ? styles.transaction : styles.transactionEven
+              index % 2 === 0 ? styles.transaction : styles.transactionEven
             }
             key={index}
           >

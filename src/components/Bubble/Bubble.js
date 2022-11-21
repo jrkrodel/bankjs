@@ -1,14 +1,32 @@
 import styles from "./Bubble.module.css";
+import { Link } from "react-router-dom";
 
-function Bubble({ title, size }) {
+function Bubble({ title, size, url, content }) {
   if (size === "sml") {
-    return <div className={styles.bubbleSml}>{title}</div>;
+    return (
+      <Link className={styles.bubbleSml}>
+        {title}
+        <p className={styles.content}>{content}</p>
+      </Link>
+    );
   }
   if (size === "med") {
-    return <div className={styles.bubbleMed}>{title}</div>;
+    return (
+      <Link className={styles.bubbleMed} to={url}>
+        {title}
+
+        <p className={styles.content}>{content}</p>
+      </Link>
+    );
   }
   if (size === "lrg") {
-    return <div className={styles.bubbleLrg}>{title}</div>;
+    return (
+      <Link className={styles.bubbleLrg} to={url}>
+        {title}
+
+        <p className={styles.content}>{content}</p>
+      </Link>
+    );
   }
 }
 

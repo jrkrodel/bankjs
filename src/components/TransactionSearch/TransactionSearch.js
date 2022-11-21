@@ -17,11 +17,19 @@ const TransactionSearch = () => {
         />
       </div>
       <div className={styles.formContainer}>
-        <input
-          type="text"
-          className={styles.searchInput}
-          placeholder="Category"
-        />
+        <select name="category" className={styles.searchInput}>
+          <option value="" disabled selected>
+            Select Category
+          </option>
+          <option value="entertainment">Entertainment</option>
+          <option value="food">Food</option>
+          <option value="health">Health</option>
+          <option value="education">Education</option>
+          <option value="transportation">Transportation</option>
+          <option value="utilities">Utilities</option>
+          <option value="housing">Housing</option>
+          <option value="personal">personal</option>
+        </select>
         <input
           type="text"
           className={styles.searchInput}

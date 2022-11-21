@@ -2,13 +2,13 @@ import styles from "./PaymentBox.module.css";
 import { useState } from "react";
 import { makeDeposit, makePayment } from "../../context/userAuthContext";
 
-const PaymentBox = () => {
+const PaymentBox = (props) => {
   const [selected, setSelected] = useState("deposit");
   const [userDeposit, setUserDeposit] = useState("");
   const [userPayment, setUserPayment] = useState({
     for: "",
     amount: "",
-    category: "",
+    category: "entertainment",
     date: "",
     type: "payment",
   });
@@ -64,13 +64,28 @@ const PaymentBox = () => {
             </div>
             <div className={styles.inputField}>
               <label>Category</label>
-              <input type="text" name="category" onChange={handleChange} />
+              <select name="category" onChange={handleChange}>
+                <option value="entertainment">Entertainment</option>
+                <option value="food">Food</option>
+                <option value="health">Health</option>
+                <option value="education">Education</option>
+                <option value="transportation">Transportation</option>
+                <option value="utilities">Utilities</option>
+                <option value="housing">Housing</option>
+                <option value="personal">personal</option>
+              </select>
             </div>
             <div className={styles.inputField}>
               <label>Date</label>
               <input type="date" name="date" onChange={handleChange} />
             </div>
-            <button type="number" onClick={() => makePayment(userPayment)}>
+            <button
+              type="number"
+              onClick={async () => {
+                await makePayment(userPayment);
+                props.getAllTransactions();
+              }}
+            >
               Submit Payment
             </button>
           </>
@@ -85,7 +100,12 @@ const PaymentBox = () => {
               />
             </div>
 
-            <button onClick={() => makeDeposit(userDeposit)}>
+            <button
+              onClick={async () => {
+                await makeDeposit(userDeposit);
+                props.getAllTransactions();
+              }}
+            >
               Submit Deposit
             </button>
           </>

@@ -13,6 +13,30 @@
   padding: 2rem 2rem 2rem 2rem;
   overflow: hidden;
   margin-left: 2rem;
+  width: 75%;
+}
+
+.header {
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.formContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.results {
+  margin: 0 0 0.5rem 0;
+  color: white;
+}
+.searchInput {
+  width: 45%;
+}
+
+.searchBar {
+  width: 100%;
 }
 
 @media screen and (max-width: 1050px) {

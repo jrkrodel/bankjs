@@ -7,6 +7,8 @@ import { useUserAuth } from "./context/userAuthContext";
 import Home from "./pages/home/Home";
 import LoginScreen from "./pages/loginScreen/LoginScreen";
 import "./app.css";
+import CreateBudget from "./pages/budgets/CreateBudget/CreateBudget";
+import Budget from "./pages/budgets/Budget/Budget";
 
 function App() {
   const { user } = useUserAuth();
@@ -29,6 +31,18 @@ function App() {
         <Route
           path="budgets"
           element={user ? <Budgets /> : <Navigate to="/" />}
+        />
+        <Route
+          path="budgets/:id"
+          element={user ? <Budget /> : <Navigate to="/" />}
+        />
+        <Route
+          path="budgets/create-budget"
+          element={user ? <CreateBudget /> : <Navigate to="/" />}
+        />
+        <Route
+          path="budgets/create-budget/:id"
+          element={user ? <CreateBudget /> : <Navigate to="/" />}
         />
         <Route
           path="profile"

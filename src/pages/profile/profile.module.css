@@ -1,0 +1,54 @@
+.profileContainer {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  background-color: #0c141d;
+  margin: 3rem auto 0 auto;
+  padding: 2rem;
+  color: white;
+  margin-bottom: 3rem;
+  border-radius: 15px;
+}
+
+.leftCol {
+  margin-right: 2rem;
+}
+
+.dataContainer {
+  background-color: #162636;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+}
+
+.dataContainer h2 {
+  margin: 0;
+}
+
+.deleteButton {
+  width: 100%;
+  background-color: #c43333;
+  border: none;
+  color: white;
+  padding: 1rem;
+  border-radius: 15px;
+  font-size: 1rem;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+}
+
+.earnings {
+  color: #3bc42c;
+}
+
+.spending {
+  color: #c43333;
+}
+
+@media screen and (max-width: 1050px) {
+  .profileContainer {
+    flex-direction: column;
+  }
+}

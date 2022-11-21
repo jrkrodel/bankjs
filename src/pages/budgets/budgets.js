@@ -1,7 +1,43 @@
+import styles from "./budgets.module.css";
+import Bubble from "../../components/Bubble/Bubble";
+import { Link } from "react-router-dom";
+import { getBudgets } from "../../context/userAuthContext";
+import { useEffect, useState } from "react";
+
 function Budgets() {
+  const [budgets, setBudgets] = useState([]);
+
+  useEffect(() => {
+    getBudgets().then((data) => {
+      setBudgets(data);
+    });
+  }, []);
+
+  let budgetBubbles;
+
+  if (budgets.length > 0) {
+    budgetBubbles = budgets.map((budget) => {
+      return (
+        <Bubble
+          title={budget.name}
+          size={"med"}
+          url={`/budgets/${budget.id}`}
+        />
+      );
+    });
+  }
+
   return (
-    <div>
-      <h1>Budgets</h1>
+    <div className={styles.budgetContainer}>
+      <div className={styles.budgetHeader}>
+        <h1>Your Budgets</h1>
+        <button>
+          <Link className={styles.budgetLink} to="/budgets/create-budget">
+            Create Budget
+          </Link>
+        </button>
+      </div>
+      <div className={styles.budgets}>{budgetBubbles}</div>
     </div>
   );
 }
