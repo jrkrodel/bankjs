@@ -13,6 +13,7 @@ const userAuthContext = createContext();
 export function UserAuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const [userFunds, setUserFunds] = useState(0);
+  const [authRunning, setAuthRunning] = useState(true);
 
   //Add user data to firestore
   const addUser = async (email) => {
@@ -31,13 +32,12 @@ export function UserAuthContextProvider({ children }) {
   };
 
   //Authenticate user
-  function login(email, password) {
-    return signInWithEmailAndPassword(auth, email, password);
+  async function login(email, password) {
+    await signInWithEmailAndPassword(auth, email, password);
   }
 
   //Signup and authenticate new user
   async function signUp(email, password) {
-    //Create user auth
     await createUserWithEmailAndPassword(auth, email, password).then(() => {
       //After user is created, add user data to firestore
       addUser(email);
@@ -55,6 +55,7 @@ export function UserAuthContextProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
       setUser(currentuser);
       console.log("Set User Ran");
+      setAuthRunning(false);
     });
 
     return () => {
@@ -71,7 +72,7 @@ export function UserAuthContextProvider({ children }) {
 
   return (
     <userAuthContext.Provider
-      value={{ user, login, signUp, logout, userFunds }}
+      value={{ user, login, signUp, logout, userFunds, authRunning }}
     >
       {children}
     </userAuthContext.Provider>

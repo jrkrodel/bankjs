@@ -30,17 +30,19 @@ const Signup = (props) => {
     <div className={styles.signUpContainer}>
       <h1>Signup</h1>
       <h2 className={styles.error}>{error ? error : ""}</h2>
-      <label>Email:</label>
-      <input value={email} onChange={(e) => setEmail(e.target.value)} />
-      <label>Password:</label>
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={signUpUser}>
-        {gettingUser ? "Creating Account..." : "Signup"}
-      </button>
+      <form>
+        <label>Email:</label>
+        <input value={email} onChange={(e) => setEmail(e.target.value)} />
+        <label>Password:</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button onClick={signUpUser}>
+          {gettingUser ? "Creating Account..." : "Signup"}
+        </button>
+      </form>
       <p>Already have an account?</p>
       <button onClick={props.switchToLogin}>Login Here</button>
     </div>

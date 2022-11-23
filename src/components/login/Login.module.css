@@ -19,6 +19,9 @@
   font-size: 16px;
   color: #c43333;
 }
+form {
+  width: 100%;
+}
 
 input,
 label {

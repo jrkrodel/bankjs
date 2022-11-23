@@ -28,17 +28,19 @@ function Login(props) {
     <div className={styles.loginContainer}>
       <h1>Login</h1>
       <h2 className={styles.error}>{error ? error : ""}</h2>
-      <label>Email:</label>
-      <input value={email} onChange={(e) => setEmail(e.target.value)} />
-      <label>Password:</label>
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={loginUser}>
-        {gettingUser ? "Logging in..." : "Login"}{" "}
-      </button>
+      <form>
+        <label>Email:</label>
+        <input value={email} onChange={(e) => setEmail(e.target.value)} />
+        <label>Password:</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button onClick={loginUser}>
+          {gettingUser ? "Logging in..." : "Login"}{" "}
+        </button>
+      </form>
       <p>Don't have an account?</p>
       <button onClick={props.switchToSignUp}>Create Account</button>
     </div>
