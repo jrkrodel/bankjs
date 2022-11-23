@@ -9,7 +9,6 @@ import {
 import { useNavigate, useParams, Link } from "react-router-dom";
 function BudgetForm() {
   const { id } = useParams();
-  console.log(id);
   const [budgetID, setBudgetID] = useState(0);
   const [creatingBudget, setCreatingBudget] = useState(false);
   const [currentBudget, setCurrentBudget] = useState(null);
@@ -33,7 +32,7 @@ function BudgetForm() {
       setBudgetID(data.length);
     });
 
-    if (id !== null) {
+    if (id !== undefined) {
       getBudgetData(id).then((data) => {
         setCurrentBudget(data);
         setBudget({
@@ -52,8 +51,8 @@ function BudgetForm() {
       });
     }
 
-    setBudget({ ...budget, ["id"]: budgetID });
-  }, [budgetID]);
+    setBudget({ ...budget, id: budgetID });
+  }, [budgetID, id]);
 
   const handleChange = (event) => {
     setBudget({ ...budget, [event.target.name]: event.target.value });
@@ -78,7 +77,7 @@ function BudgetForm() {
       <div className={styles.budgetForm}>
         <div className={styles.inputContainer}>
           <div className={styles.inputForm}>
-            <label for="name">Budget Name:</label>
+            <label htmlFor="name">Budget Name:</label>
             <input
               value={budget.name}
               onChange={handleChange}
@@ -89,9 +88,7 @@ function BudgetForm() {
           <div className={styles.inputForm}>
             <label>Length</label>
             <select value={budget.length} name="length" onChange={handleChange}>
-              <option selected value="2w">
-                2 Weeks
-              </option>
+              <option value="2w">2 Weeks</option>
               <option value="1m">1 Month</option>
               <option value="6m">6 Months</option>
               <option value="1y">1 Year</option>
@@ -100,7 +97,7 @@ function BudgetForm() {
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.inputForm}>
-            <label for="education">Education:</label>
+            <label htmlFor="education">Education:</label>
             <input
               value={budget.education}
               onChange={handleChange}
@@ -109,7 +106,7 @@ function BudgetForm() {
             />
           </div>
           <div className={styles.inputForm}>
-            <label for="entertainment">Entertainment:</label>
+            <label htmlFor="entertainment">Entertainment:</label>
             <input
               value={budget.entertainment}
               onChange={handleChange}
@@ -120,7 +117,7 @@ function BudgetForm() {
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.inputForm}>
-            <label for="food">Food:</label>
+            <label htmlFor="food">Food:</label>
             <input
               value={budget.food}
               onChange={handleChange}
@@ -129,7 +126,7 @@ function BudgetForm() {
             />
           </div>
           <div className={styles.inputForm}>
-            <label for="health">Health:</label>
+            <label htmlFor="health">Health:</label>
             <input
               value={budget.health}
               onChange={handleChange}
@@ -140,7 +137,7 @@ function BudgetForm() {
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.inputForm}>
-            <label for="housing">Housing:</label>
+            <label htmlFor="housing">Housing:</label>
             <input
               value={budget.housing}
               onChange={handleChange}
@@ -149,7 +146,7 @@ function BudgetForm() {
             />
           </div>
           <div className={styles.inputForm}>
-            <label for="personal">Personal:</label>
+            <label htmlFor="personal">Personal:</label>
             <input
               value={budget.personal}
               onChange={handleChange}
@@ -160,7 +157,7 @@ function BudgetForm() {
         </div>
         <div className={styles.inputContainer}>
           <div className={styles.inputForm}>
-            <label for="transporation">Transportation</label>
+            <label htmlFor="transporation">Transportation</label>
             <input
               value={budget.transportation}
               onChange={handleChange}
@@ -169,7 +166,7 @@ function BudgetForm() {
             />
           </div>
           <div className={styles.inputForm}>
-            <label for="utilities">Utilities:</label>
+            <label htmlFor="utilities">Utilities:</label>
             <input
               value={budget.utilities}
               onChange={handleChange}

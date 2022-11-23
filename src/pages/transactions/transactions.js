@@ -20,97 +20,98 @@ function Transactions() {
     setSortedTransactions(data);
   };
 
-  const sortTransactions = async () => {
-    if (transactions) {
-      let sorted;
-      let allTransactions = [...transactions];
-
-      setSortedTransactions(allTransactions);
-
-      if (search.filter === "all") {
-        sorted = allTransactions;
-      } else if (search.filter === "deposit") {
-        sorted = allTransactions.filter((transaction) => {
-          return transaction.type === "deposit";
-        });
-      } else if (search.filter === "payment") {
-        sorted = allTransactions.filter((transaction) => {
-          return transaction.type === "payment";
-        });
-      } else if (search.filter !== "") {
-        sorted = allTransactions.filter((transaction) => {
-          return transaction.category === search.filter;
-        });
-      }
-
-      if (search.sortBy === "high") {
-        sorted.sort((a, b) => {
-          let x = Number(a.amount);
-          let y = Number(b.amount);
-          if (x < y) {
-            return 1;
-          }
-          if (x > y) {
-            return -1;
-          }
-          return 0;
-        });
-      } else if (search.sortBy === "low") {
-        sorted.sort((a, b) => {
-          let x = Number(a.amount);
-          let y = Number(b.amount);
-          if (x > y) {
-            return 1;
-          }
-          if (x < y) {
-            return -1;
-          }
-          return 0;
-        });
-      } else if (search.sortBy === "latest") {
-        sorted.sort((a, b) => {
-          if (a.date < b.date) {
-            return 1;
-          }
-          if (a.date > b.date) {
-            return -1;
-          }
-          return 0;
-        });
-      } else if (search.sortBy === "oldest") {
-        sorted.sort((a, b) => {
-          if (a.date > b.date) {
-            return 1;
-          }
-          if (a.date < b.date) {
-            return -1;
-          }
-          return 0;
-        });
-      }
-
-      if (search.for !== "") {
-        sorted = sorted.filter((transaction) => {
-          if (transaction.category || transaction.for) {
-            return (
-              transaction.for.includes(search.for) ||
-              transaction.category.includes(search.for)
-            );
-          }
-        });
-      }
-
-      setSortedTransactions(sorted);
-    }
-  };
-
   useEffect(() => {
     getAllTransactions();
   }, []);
 
   useEffect(() => {
+    const sortTransactions = async () => {
+      if (transactions) {
+        let sorted;
+        let allTransactions = [...transactions];
+
+        setSortedTransactions(allTransactions);
+
+        if (search.filter === "all") {
+          sorted = allTransactions;
+        } else if (search.filter === "deposit") {
+          sorted = allTransactions.filter((transaction) => {
+            return transaction.type === "deposit";
+          });
+        } else if (search.filter === "payment") {
+          sorted = allTransactions.filter((transaction) => {
+            return transaction.type === "payment";
+          });
+        } else if (search.filter !== "") {
+          sorted = allTransactions.filter((transaction) => {
+            return transaction.category === search.filter;
+          });
+        }
+
+        if (search.sortBy === "high") {
+          sorted.sort((a, b) => {
+            let x = Number(a.amount);
+            let y = Number(b.amount);
+            if (x < y) {
+              return 1;
+            }
+            if (x > y) {
+              return -1;
+            }
+            return 0;
+          });
+        } else if (search.sortBy === "low") {
+          sorted.sort((a, b) => {
+            let x = Number(a.amount);
+            let y = Number(b.amount);
+            if (x > y) {
+              return 1;
+            }
+            if (x < y) {
+              return -1;
+            }
+            return 0;
+          });
+        } else if (search.sortBy === "latest") {
+          sorted.sort((a, b) => {
+            if (a.date < b.date) {
+              return 1;
+            }
+            if (a.date > b.date) {
+              return -1;
+            }
+            return 0;
+          });
+        } else if (search.sortBy === "oldest") {
+          sorted.sort((a, b) => {
+            if (a.date > b.date) {
+              return 1;
+            }
+            if (a.date < b.date) {
+              return -1;
+            }
+            return 0;
+          });
+        }
+
+        if (search.for !== "") {
+          sorted = sorted.filter((transaction) => {
+            if (transaction.category || transaction.for) {
+              return (
+                transaction.for.includes(search.for) ||
+                transaction.category.includes(search.for)
+              );
+            } else {
+              return null;
+            }
+          });
+        }
+
+        setSortedTransactions(sorted);
+      }
+    };
     sortTransactions();
-  }, [search.sortBy, search.filter, search.category, search.for]);
+  }, [search.sortBy, search.filter, search.category, search.for, transactions]);
 
   const handleChange = (event) => {
     setSearch({ ...search, [event.target.name]: event.target.value });
@@ -136,10 +137,9 @@ function Transactions() {
               name="filter"
               onChange={handleChange}
               className={styles.searchInput}
+              defaultValue="all"
             >
-              <option value="all" selected>
-                All
-              </option>
+              <option value="all">All</option>
               <option value="payment">Payments</option>
               <option value="deposit">Deposits</option>
               <option value="entertainment">Entertainment</option>
@@ -155,10 +155,9 @@ function Transactions() {
               name="sortBy"
               onChange={handleChange}
               className={styles.searchInput}
+              defaultValue="latest"
             >
-              <option value="latest" selected>
-                Latest
-              </option>
+              <option value="latest">Latest</option>
               <option value="oldest">Oldest</option>
               <option value="high">High</option>
               <option value="low">Low</option>

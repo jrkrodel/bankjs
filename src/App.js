@@ -1,4 +1,4 @@
-import Budgets from "./pages/budgets/Budgets";
+import Budgets from "./pages/Budgets/Budgets";
 import Profile from "./pages/Profile/Profile";
 import Transactions from "./pages/Transactions/Transactions";
 import Nav from "./components/Nav/Nav";
@@ -8,7 +8,7 @@ import Home from "./pages/Home/Home";
 import LoginScreen from "./pages/LoginScreen/LoginScreen";
 import "./app.css";
 import BudgetForm from "./components/BudgetForm/BudgetForm";
-import Budget from "./pages/budgets/Budget/Budget";
+import Budget from "./pages/Budgets/Budget/Budget";
 
 function App() {
   const { user } = useUserAuth();

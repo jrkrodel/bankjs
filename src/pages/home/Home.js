@@ -4,7 +4,6 @@ import {
   getTransactions,
   getBudgets,
   useUserAuth,
-  getUserData,
 } from "../../context/userAuthContext";
 import { useEffect, useState } from "react";
 
@@ -85,7 +84,7 @@ function Home() {
         <Bubble
           title={"Up/Down"}
           size={"sml"}
-          content={upDown ? "Today: " + "$ " + upDown : "None"}
+          content={upDown ? `Today: $${upDown}` : "None"}
         />
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import styles from "./BudgetGraph.module.css";
 import {
   Chart as ChartJS,
@@ -88,52 +88,38 @@ function BudgetGraph({ graphData, compareSpending }) {
   let spendingValues = [];
   console.log(compareSpending);
 
-  Object.keys(graphData).map((key) => {
+  Object.keys(graphData).forEach((key) => {
     if (key !== "id" && key !== "name" && key !== "length") {
       if (graphData[key] !== 0 && graphData[key] !== "0") {
-        console.log(graphData[key]);
         keys.push(key.charAt(0).toUpperCase() + key.slice(1));
         values.push(Number(graphData[key]));
+      } else {
+        return null;
       }
     } else {
       return null;
     }
   });
 
-  Object.keys(compareSpending).map((key) => {
+  Object.keys(compareSpending).forEach((key) => {
     if (keys.includes(key.charAt(0).toUpperCase() + key.slice(1))) {
       spendingKeys.push(key.charAt(0).toUpperCase() + key.slice(1));
       spendingValues.push(Number(compareSpending[key]));
     }
   });
 
-  // const transactions = compareSpending.forEach((transaction) => {
-  //   Object.keys(transaction).map((key) => {
-  //     if (key === "amount" || key === "category") {
-  //       transactionsKeys.push(key.charAt(0).toUpperCase() + key.slice(1));
-  //       transactionsValues.push(Number(graphData[key]));
-  //     } else {
-  //       return null;
-  //     }
-  //   });
-  // });
-
-  // console.log(transactions);
   const data = {
     labels: keys,
-    // datasets is an array of objects where each object represents a set of data to display corresponding to the labels above. for brevity, we'll keep it at one object
     datasets: [
       {
         label: "Your Budget",
         data: values,
-        // you can set indiviual colors for each bar
         backgroundColor: ["#162636"],
         borderWidth: 0.5,
       },
       {
         label: "Spending",
         data: spendingValues,
-        // you can set indiviual colors for each bar
         backgroundColor: ["#c43333"],
         borderWidth: 0.5,
       },

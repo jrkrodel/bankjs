@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import {
   getBudgetData,
   deleteBudget,
-  getTransactions,
   getTransactionsForGraph,
 } from "../../../context/userAuthContext";
 import styles from "./Budget.module.css";
@@ -90,7 +89,7 @@ function Budget() {
               <div className={styles.budgetButtons}>
                 <Link
                   className={styles.editBudget}
-                  to={`/budgets/create-budget/${id}`}
+                  to={`/budgets/budget-form/${id}`}
                 >
                   Edit Budget
                 </Link>

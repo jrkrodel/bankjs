@@ -16,9 +16,10 @@ function Budgets() {
   let budgetBubbles;
 
   if (budgets.length > 0) {
-    budgetBubbles = budgets.map((budget) => {
+    budgetBubbles = budgets.map((budget, ind) => {
       return (
         <Bubble
+          key={ind}
           title={budget.name}
           size={"med"}
           url={`/budgets/${budget.id}`}
@@ -32,7 +33,7 @@ function Budgets() {
       <div className={styles.budgetHeader}>
         <h1>Your Budgets</h1>
 
-        <Link className={styles.budgetLink} to="/budgets/create-budget">
+        <Link className={styles.budgetLink} to="/budgets/budget-form">
           <button>Create Budget</button>
         </Link>
       </div>
