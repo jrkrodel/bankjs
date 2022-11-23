@@ -1,5 +1,6 @@
 .transactionsContainer {
   width: 80%;
+  max-width: 80rem;
   display: flex;
   justify-content: space-around;
   align-items: flex-start;

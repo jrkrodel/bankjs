@@ -1,5 +1,6 @@
 .profileContainer {
   width: 60%;
+  max-width: 60rem;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
