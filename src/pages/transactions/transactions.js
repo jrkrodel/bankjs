@@ -1,7 +1,7 @@
 import TransactionBox from "../../components/TransactionBox/TransactionBox";
 import TransactionList from "../../components/TransactionsList/TransactionList";
 import styles from "./Transactions.module.css";
-import { getTransactions } from "../../context/userAuthContext";
+import { getTransactions } from "../../firebase/utils/firebaseUtils";
 import { useState, useEffect } from "react";
 
 function Transactions() {

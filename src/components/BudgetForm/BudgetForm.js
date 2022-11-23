@@ -5,7 +5,7 @@ import {
   getBudgets,
   getBudgetData,
   editBudget,
-} from "../../context/userAuthContext";
+} from "../../firebase/utils/firebaseUtils";
 import { useNavigate, useParams, Link } from "react-router-dom";
 function BudgetForm() {
   const { id } = useParams();

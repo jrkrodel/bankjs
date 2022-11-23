@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styles from "./Profile.module.css";
-import { getUserData } from "../../context/userAuthContext";
+import { getUserData } from "../../firebase/utils/firebaseUtils";
 import { useUserAuth } from "../../context/userAuthContext";
 
 function Profile() {

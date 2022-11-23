@@ -1,7 +1,7 @@
 import styles from "./Budgets.module.css";
 import Bubble from "../../components/Bubble/Bubble";
 import { Link } from "react-router-dom";
-import { getBudgets } from "../../context/userAuthContext";
+import { getBudgets } from "../../firebase/utils/firebaseUtils";
 import { useEffect, useState } from "react";
 
 function Budgets() {

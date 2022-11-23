@@ -1,6 +1,6 @@
 import styles from "./TransactionBox.module.css";
 import { useState } from "react";
-import { makeDeposit, makePayment } from "../../context/userAuthContext";
+import { makeDeposit, makePayment } from "../../firebase/utils/firebaseUtils";
 
 const TransactionBox = (props) => {
   const [selected, setSelected] = useState("deposit");

@@ -1,10 +1,10 @@
 import Bubble from "../../components/Bubble/Bubble";
 import styles from "./Home.module.css";
+import { useUserAuth } from "../../context/userAuthContext";
 import {
   getTransactions,
   getBudgets,
-  useUserAuth,
-} from "../../context/userAuthContext";
+} from "../../firebase/utils/firebaseUtils";
 import { useEffect, useState } from "react";
 
 function Home() {
