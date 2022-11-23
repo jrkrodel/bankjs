@@ -10,7 +10,7 @@ import styles from "./Budget.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import BudgetGraph from "../BudgetGraph/BudgetGraph";
+import BudgetGraph from "../../../components/BudgetGraph/BudgetGraph";
 
 function Budget() {
   const [budget, setBudget] = useState(null);

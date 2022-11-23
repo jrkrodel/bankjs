@@ -38,6 +38,10 @@
   font-size: 1rem;
   margin-right: 3%;
 }
+.fundsMobile {
+  color: white;
+  font-size: 1rem;
+}
 
 .mobileNavBarClosed {
   position: absolute;
@@ -79,6 +83,9 @@
 
 @media screen and (max-width: 1050px) {
   .navLink {
+    display: none;
+  }
+  .funds {
     display: none;
   }
   .mobileNav {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "./profile.module.css";
+import styles from "./Profile.module.css";
 import { getUserData } from "../../context/userAuthContext";
 import { useUserAuth } from "../../context/userAuthContext";
 
@@ -28,21 +28,21 @@ function Profile() {
         </div>
         <div className={styles.rightCol}>
           <div className={styles.dataContainer}>
-            <h2>Total Budgets: {userData.budgets}</h2>
+            <h2>Budgets: {userData.budgets}</h2>
           </div>
 
           <div className={styles.dataContainer}>
-            <h2>Total Transactions: {userData.transactions}</h2>
+            <h2>Transactions: {userData.transactions}</h2>
           </div>
           <div className={styles.dataContainer}>
             <h2>
-              Total Earnings:{" "}
+              Earnings:{" "}
               <span className={styles.earnings}>${userData.earnings}</span>
             </h2>
           </div>
           <div className={styles.dataContainer}>
             <h2>
-              Total Spendings:{" "}
+              Spendings:{" "}
               <span className={styles.spending}>${userData.spendings}</span>
             </h2>
           </div>

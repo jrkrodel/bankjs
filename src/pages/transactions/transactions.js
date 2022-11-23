@@ -1,6 +1,6 @@
-import PaymentBox from "../../components/PaymentBox/PaymentBox";
+import TransactionBox from "../../components/TransactionBox/TransactionBox";
 import TransactionList from "../../components/TransactionsList/TransactionList";
-import styles from "./transcations.module.css";
+import styles from "./Transactions.module.css";
 import { getTransactions } from "../../context/userAuthContext";
 import { useState, useEffect } from "react";
 
@@ -118,7 +118,7 @@ function Transactions() {
 
   return (
     <div className={styles.transactionsContainer}>
-      <PaymentBox getAllTransactions={getAllTransactions} />
+      <TransactionBox getAllTransactions={getAllTransactions} />
       <div className={styles.transactionBar}>
         <div>
           <h1 className={styles.header}>Search Payments & Deposits</h1>

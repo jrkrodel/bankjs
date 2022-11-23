@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import styles from "../Budget/Budget.module.css";
+import styles from "./BudgetGraph.module.css";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -90,17 +90,21 @@ function BudgetGraph({ graphData, compareSpending }) {
 
   Object.keys(graphData).map((key) => {
     if (key !== "id" && key !== "name" && key !== "length") {
-      keys.push(key.charAt(0).toUpperCase() + key.slice(1));
-      values.push(Number(graphData[key]));
+      if (graphData[key] !== 0 && graphData[key] !== "0") {
+        console.log(graphData[key]);
+        keys.push(key.charAt(0).toUpperCase() + key.slice(1));
+        values.push(Number(graphData[key]));
+      }
     } else {
       return null;
     }
   });
-  console.log(graphData);
-  console.log(compareSpending);
+
   Object.keys(compareSpending).map((key) => {
-    spendingKeys.push(key.charAt(0).toUpperCase() + key.slice(1));
-    spendingValues.push(Number(compareSpending[key]));
+    if (keys.includes(key.charAt(0).toUpperCase() + key.slice(1))) {
+      spendingKeys.push(key.charAt(0).toUpperCase() + key.slice(1));
+      spendingValues.push(Number(compareSpending[key]));
+    }
   });
 
   // const transactions = compareSpending.forEach((transaction) => {

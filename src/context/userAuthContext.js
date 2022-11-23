@@ -47,15 +47,11 @@ export function UserAuthContextProvider({ children }) {
 
   //Signup and authenticate new user
   async function signUp(email, password) {
-    try {
-      //Create user auth
-      await createUserWithEmailAndPassword(auth, email, password).then(() => {
-        //After user is created, add user data to firestore
-        addUser(email);
-      });
-    } catch (e) {
-      console.log(e);
-    }
+    //Create user auth
+    await createUserWithEmailAndPassword(auth, email, password).then(() => {
+      //After user is created, add user data to firestore
+      addUser(email);
+    });
   }
 
   //Log user out
@@ -184,10 +180,10 @@ export async function getTransactions() {
   });
 
   const sortedTransactions = transactions.sort((a, b) => {
-    if (a.updatedAt < b.updatedAt) {
+    if (a.date < b.date) {
       return 1;
     }
-    if (a.updatedAt > b.updatedAt) {
+    if (a.date > b.date) {
       return -1;
     }
     return 0;

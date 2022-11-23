@@ -1,4 +1,4 @@
-import styles from "./budgets.module.css";
+import styles from "./Budgets.module.css";
 import Bubble from "../../components/Bubble/Bubble";
 import { Link } from "react-router-dom";
 import { getBudgets } from "../../context/userAuthContext";
@@ -31,11 +31,10 @@ function Budgets() {
     <div className={styles.budgetContainer}>
       <div className={styles.budgetHeader}>
         <h1>Your Budgets</h1>
-        <button>
-          <Link className={styles.budgetLink} to="/budgets/create-budget">
-            Create Budget
-          </Link>
-        </button>
+
+        <Link className={styles.budgetLink} to="/budgets/create-budget">
+          <button>Create Budget</button>
+        </Link>
       </div>
       <div className={styles.budgets}>{budgetBubbles}</div>
     </div>

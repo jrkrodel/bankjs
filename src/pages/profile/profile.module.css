@@ -51,4 +51,9 @@
   .profileContainer {
     flex-direction: column;
   }
+  .dataContainer {
+    font-size: 0.6rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
 }

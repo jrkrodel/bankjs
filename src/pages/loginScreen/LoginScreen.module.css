@@ -3,8 +3,8 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-
-  margin: 3rem auto 0 auto;
+  min-height: 40rem;
+  margin: 0 auto 0 auto;
 }
 
 .container h1 {
@@ -14,7 +14,7 @@
 .loginBox {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: grow;
   width: 100%;
 }
 
@@ -24,14 +24,14 @@
   align-items: flex-start;
   width: 40%;
   min-width: 15rem;
-  min-height: 35rem;
+  height: 100%;
   background-color: white;
 }
 
 .logo {
   background-color: #305375;
   width: 40%;
-  height: 35rem;
+  min-height: 30rem;
   min-width: 15rem;
   text-align: center;
   padding-top: 2rem;
@@ -48,5 +48,6 @@
   }
   .form {
     width: 100%;
+    margin-bottom: 5rem;
   }
 }

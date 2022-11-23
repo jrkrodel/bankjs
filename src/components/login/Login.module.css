@@ -1,39 +1,45 @@
 .loginContainer {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-direction: column;
-    padding: 2rem;
-    width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 2rem;
+  width: 100%;
 }
 
 .loginContainer h1 {
-    font-size: 48px;
+  font-size: 48px;
 }
 
 .loginContainer p {
-    font-size: 20px;
+  font-size: 20px;
 }
 
-input, label {
-    display: block;
-    margin-bottom: 1rem;
-    font-family: Raleway;
-    color: black;
+.error {
+  font-size: 16px;
+  color: #c43333;
+}
+
+input,
+label {
+  display: block;
+  margin-bottom: 1rem;
+  font-family: Raleway;
+  color: black;
 }
 input {
-    padding: 0.5rem;
-    width: 100%;
+  padding: 0.5rem;
+  width: 100%;
 }
 
 button {
-    margin: 1rem auto;
-    background-color: #305375;
-    border: none;
-    color: white;
-    padding: 1rem;
-    border-radius: 15px;
-    font-size: 16px;
-    margin-bottom: 2rem;
-    font-family: Raleway;
+  margin: 1rem auto;
+  background-color: #305375;
+  border: none;
+  color: white;
+  padding: 1rem;
+  border-radius: 15px;
+  font-size: 16px;
+  margin-bottom: 2rem;
+  font-family: Raleway;
 }

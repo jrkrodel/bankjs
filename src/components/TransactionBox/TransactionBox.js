@@ -1,10 +1,11 @@
-import styles from "./PaymentBox.module.css";
+import styles from "./TransactionBox.module.css";
 import { useState } from "react";
 import { makeDeposit, makePayment } from "../../context/userAuthContext";
 
-const PaymentBox = (props) => {
+const TransactionBox = (props) => {
   const [selected, setSelected] = useState("deposit");
   const [userDeposit, setUserDeposit] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const [userPayment, setUserPayment] = useState({
     for: "",
     amount: "",
@@ -24,6 +25,20 @@ const PaymentBox = (props) => {
   const handleChange = (event) => {
     setUserPayment({ ...userPayment, [event.target.name]: event.target.value });
     console.log(userPayment);
+  };
+
+  const submitPayment = async () => {
+    setSubmitting(true);
+    await makePayment(userPayment);
+    props.getAllTransactions();
+    setSubmitting(false);
+  };
+
+  const submitDeposit = async () => {
+    setSubmitting(true);
+    await makeDeposit(userDeposit);
+    props.getAllTransactions();
+    setSubmitting(false);
   };
 
   return (
@@ -79,14 +94,8 @@ const PaymentBox = (props) => {
               <label>Date</label>
               <input type="date" name="date" onChange={handleChange} />
             </div>
-            <button
-              type="number"
-              onClick={async () => {
-                await makePayment(userPayment);
-                props.getAllTransactions();
-              }}
-            >
-              Submit Payment
+            <button type="number" onClick={submitPayment}>
+              {!submitting ? "Submit Payment" : "Submitting..."}
             </button>
           </>
         ) : (
@@ -100,13 +109,8 @@ const PaymentBox = (props) => {
               />
             </div>
 
-            <button
-              onClick={async () => {
-                await makeDeposit(userDeposit);
-                props.getAllTransactions();
-              }}
-            >
-              Submit Deposit
+            <button onClick={submitDeposit}>
+              {!submitting ? "Submit Deposit" : "Submitting..."}
             </button>
           </>
         )}
@@ -115,4 +119,4 @@ const PaymentBox = (props) => {
   );
 };
 
-export default PaymentBox;
+export default TransactionBox;

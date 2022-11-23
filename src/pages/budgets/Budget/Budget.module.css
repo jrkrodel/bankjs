@@ -11,12 +11,6 @@
 
   margin: 3rem auto 0 auto;
 }
-.graph {
-  width: 100%;
-  min-height: 30rem;
-  padding: 2rem;
-  position: relative;
-}
 
 .budgetDisplay {
   width: 100%;
@@ -73,7 +67,7 @@
 }
 
 .editBudget {
-  min-width: 10rem;
+  min-width: 40%;
   margin: 0 1rem 0 0;
   background-color: #305375;
   border: none;
@@ -94,7 +88,7 @@
 }
 
 .deleteBudget {
-  min-width: 10rem;
+  min-width: 40%;
   background-color: #c43333;
   border: none;
   color: white;
@@ -119,5 +113,17 @@
   }
   .budgetDisplayHeaderText {
     margin-bottom: 2rem;
+  }
+  .budgetButtons {
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+  }
+  .editBudget {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .deleteBudget {
+    width: 100%;
   }
 }

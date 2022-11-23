@@ -1,13 +1,13 @@
-import Budgets from "./pages/budgets/budgets";
-import Profile from "./pages/profile/profile";
-import Transactions from "./pages/transactions/transactions";
-import Nav from "./components/nav/nav";
+import Budgets from "./pages/budgets/Budgets";
+import Profile from "./pages/Profile/Profile";
+import Transactions from "./pages/Transactions/Transactions";
+import Nav from "./components/Nav/Nav";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useUserAuth } from "./context/userAuthContext";
-import Home from "./pages/home/Home";
-import LoginScreen from "./pages/loginScreen/LoginScreen";
+import Home from "./pages/Home/Home";
+import LoginScreen from "./pages/LoginScreen/LoginScreen";
 import "./app.css";
-import CreateBudget from "./pages/budgets/CreateBudget/CreateBudget";
+import BudgetForm from "./components/BudgetForm/BudgetForm";
 import Budget from "./pages/budgets/Budget/Budget";
 
 function App() {
@@ -37,12 +37,12 @@ function App() {
           element={user ? <Budget /> : <Navigate to="/" />}
         />
         <Route
-          path="budgets/create-budget"
-          element={user ? <CreateBudget /> : <Navigate to="/" />}
+          path="budgets/budget-form"
+          element={user ? <BudgetForm /> : <Navigate to="/" />}
         />
         <Route
-          path="budgets/create-budget/:id"
-          element={user ? <CreateBudget /> : <Navigate to="/" />}
+          path="budgets/budget-form/:id"
+          element={user ? <BudgetForm /> : <Navigate to="/" />}
         />
         <Route
           path="profile"

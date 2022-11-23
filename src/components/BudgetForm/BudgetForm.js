@@ -1,14 +1,15 @@
-import styles from "./createBudget.module.css";
+import styles from "./BudgetForm.module.css";
 import { useState, useEffect } from "react";
 import {
   createBudget,
   getBudgets,
   getBudgetData,
   editBudget,
-} from "../../../context/userAuthContext";
+} from "../../context/userAuthContext";
 import { useNavigate, useParams, Link } from "react-router-dom";
-function CreateBudget() {
+function BudgetForm() {
   const { id } = useParams();
+  console.log(id);
   const [budgetID, setBudgetID] = useState(0);
   const [creatingBudget, setCreatingBudget] = useState(false);
   const [currentBudget, setCurrentBudget] = useState(null);
@@ -195,14 +196,15 @@ function CreateBudget() {
           </button>
         )}
 
-        <Link to="/budgets" className={styles.buttonLink}>
-          <button to="/budgets" className={styles.cancelButton}>
-            Cancel
-          </button>
+        <Link
+          to={id ? `/budgets/${id}` : `/budgets`}
+          className={styles.buttonLink}
+        >
+          <button className={styles.cancelButton}>Cancel</button>
         </Link>
       </div>
     </div>
   );
 }
 
-export default CreateBudget;
+export default BudgetForm;

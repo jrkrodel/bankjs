@@ -3,7 +3,6 @@
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
-
   margin: 3rem auto 0 auto;
 }
 
@@ -39,7 +38,7 @@
   width: 100%;
 }
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 800px) {
   .transactionsContainer {
     flex-direction: column;
     justify-content: flex-start;
@@ -48,6 +47,7 @@
     justify-content: flex-start;
   }
   .transactionBar {
+    width: 100%;
     margin-top: 2rem;
     margin-left: 0rem;
   }

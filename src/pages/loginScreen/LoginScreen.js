@@ -1,6 +1,6 @@
-import Login from "../../components/login/login";
+import Login from "../../components/Login/Login";
 import styles from "./LoginScreen.module.css";
-import Signup from "../../components/signup/signup";
+import Signup from "../../components/Signup/Signup";
 import { useState } from "react";
 import { useUserAuth } from "../../context/userAuthContext";
 import { Navigate } from "react-router-dom";

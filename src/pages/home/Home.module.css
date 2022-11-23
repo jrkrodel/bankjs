@@ -13,10 +13,9 @@
   justify-content: space-around;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 850px) {
   .bubbleRow {
     flex-direction: column;
-    max-width: 20rem;
-    margin: 0 auto;
+    width: 100%;
   }
 }
