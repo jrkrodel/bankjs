@@ -12,8 +12,13 @@
   border-radius: 15px;
 }
 
+.profileLabel {
+  color: white;
+}
+
 .leftCol {
   margin-right: 2rem;
+  width: 40%;
 }
 
 .dataContainer {
@@ -40,6 +45,16 @@
   cursor: pointer;
 }
 
+.cancelButton {
+  background-color: #c43333;
+  margin: 0;
+}
+
+.profileButton {
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
 .earnings {
   color: #3bc42c;
 }
@@ -56,5 +71,9 @@
     font-size: 0.6rem;
     padding: 1rem;
     margin-bottom: 1rem;
+  }
+  .leftCol {
+    width: 100%;
+    margin-bottom: 2rem;
   }
 }

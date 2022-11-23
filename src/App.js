@@ -9,7 +9,6 @@ import LoginScreen from "./pages/LoginScreen/LoginScreen";
 import "./app.css";
 import BudgetForm from "./components/BudgetForm/BudgetForm";
 import Budget from "./pages/Budgets/Budget/Budget";
-import { useEffect } from "react";
 
 function App() {
   const { user } = useUserAuth();

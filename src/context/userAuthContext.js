@@ -3,7 +3,10 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   onAuthStateChanged,
+  updateProfile,
+  updateEmail,
   signOut,
+  deleteUser,
 } from "firebase/auth";
 import { auth, db } from "../firebase/config/firebaseConfig";
 import { doc, setDoc, onSnapshot } from "firebase/firestore";
@@ -16,9 +19,10 @@ export function UserAuthContextProvider({ children }) {
   const [authRunning, setAuthRunning] = useState(true);
 
   //Add user data to firestore
-  const addUser = async (email) => {
+  const addUser = async (email, fName, lName) => {
     try {
       await setDoc(doc(db, "users", auth.currentUser.uid), {
+        name: fName + " " + lName,
         email: email,
         budgets: 0,
         transactions: 0,
@@ -37,11 +41,30 @@ export function UserAuthContextProvider({ children }) {
   }
 
   //Signup and authenticate new user
-  async function signUp(email, password) {
-    await createUserWithEmailAndPassword(auth, email, password).then(() => {
-      //After user is created, add user data to firestore
-      addUser(email);
+  async function signUp(email, password, signUpForm) {
+    await createUserWithEmailAndPassword(auth, email, password).then(
+      (result) => {
+        updateProfile(auth.currentUser, {
+          displayName: signUpForm.fName.trim() + " " + signUpForm.lName.trim(),
+        });
+        //After user is created, add user data to firestore
+        addUser(email, signUpForm.fName, signUpForm.lName);
+      }
+    );
+  }
+
+  async function updateUserDetails(email, fName, lName) {
+    await updateProfile(auth.currentUser, {
+      email: email,
+      displayName: fName.trim() + " " + lName.trim(),
     });
+    await updateEmail(auth.currentUser, email)
+      .then(() => {
+        console.log("updated");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   //Log user out
@@ -70,9 +93,30 @@ export function UserAuthContextProvider({ children }) {
     });
   }
 
+  function deleteAccount() {
+    if (user) {
+      deleteUser(auth.currentUser)
+        .then(() => {
+          console.log("deleted");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }
+
   return (
     <userAuthContext.Provider
-      value={{ user, login, signUp, logout, userFunds, authRunning }}
+      value={{
+        user,
+        login,
+        signUp,
+        logout,
+        userFunds,
+        authRunning,
+        deleteAccount,
+        updateUserDetails,
+      }}
     >
       {children}
     </userAuthContext.Provider>

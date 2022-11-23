@@ -234,3 +234,18 @@ export async function editBudget(budget, id) {
     budget,
   });
 }
+
+export async function deleteAccountData() {
+  const userRef = doc(db, "users", auth.currentUser.uid);
+  await deleteDoc(userRef);
+}
+
+export async function updateProfileDoc(fName, lName, email) {
+  console.log(fName);
+  const userRef = doc(db, "users", auth.currentUser.uid);
+
+  await updateDoc(userRef, {
+    name: fName.trim() + " " + lName.trim(),
+    email: email,
+  });
+}

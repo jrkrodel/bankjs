@@ -8,23 +8,25 @@
 }
 
 .signUpContainer h1 {
-  font-size: 46px;
+  font-size: 36px;
 }
 
 .signUpContainer p {
   font-size: 20px;
+  margin: 0;
 }
 
 input,
 label {
   display: block;
-  margin-bottom: 1rem;
+  margin-bottom: 0.3rem;
   font-family: Raleway;
   color: black;
 }
 
 input {
   border: 1px solid black;
+  margin-bottom: 1rem;
 }
 
 input {
@@ -37,6 +39,11 @@ input {
   color: #c43333;
 }
 
+.topRow {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
 button {
   margin: 1rem auto;
   background-color: #305375;
@@ -46,6 +53,6 @@ button {
   border-radius: 15px;
   width: 100%;
   font-size: 16px;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
   font-family: Raleway;
 }
