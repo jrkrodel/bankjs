@@ -6,6 +6,7 @@ const TransactionBox = (props) => {
   const [selected, setSelected] = useState("deposit");
   const [userDeposit, setUserDeposit] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [inputError, setInputError] = useState(false);
   const [userPayment, setUserPayment] = useState({
     for: "",
     amount: "",
@@ -15,10 +16,12 @@ const TransactionBox = (props) => {
   });
 
   const depositMenu = () => {
+    setInputError(false);
     setSelected("deposit");
   };
 
   const paymentMenu = () => {
+    setInputError([]);
     setSelected("payment");
   };
 
@@ -28,17 +31,45 @@ const TransactionBox = (props) => {
   };
 
   const submitPayment = async () => {
-    setSubmitting(true);
-    await makePayment(userPayment);
-    props.getAllTransactions();
-    setSubmitting(false);
+    if (
+      userPayment.for.trim() !== "" &&
+      userPayment.amount.trim() !== "" &&
+      userPayment.category !== "" &&
+      userPayment.date !== "" &&
+      userPayment.type !== ""
+    ) {
+      setInputError([]);
+      setSubmitting(true);
+      await makePayment(userPayment);
+      props.getAllTransactions();
+      setSubmitting(false);
+    } else {
+      const errors = [];
+      if (userPayment.for.trim() === "") {
+        errors.push("for");
+      }
+      if (userPayment.amount === "") {
+        errors.push("amount");
+      }
+      if (userPayment.category === "") {
+        errors.push("category");
+      }
+      if (userPayment.date === "") {
+        errors.push("date");
+      }
+      setInputError([...errors]);
+    }
   };
 
   const submitDeposit = async () => {
-    setSubmitting(true);
-    await makeDeposit(userDeposit);
-    props.getAllTransactions();
-    setSubmitting(false);
+    if (userDeposit.trim() !== "") {
+      setSubmitting(true);
+      await makeDeposit(userDeposit);
+      props.getAllTransactions();
+      setSubmitting(false);
+    } else {
+      setInputError("Amount");
+    }
   };
 
   return (
@@ -65,21 +96,55 @@ const TransactionBox = (props) => {
         {selected === "payment" ? (
           <>
             <div className={styles.inputField}>
-              <label>For</label>
+              <label
+                className={
+                  inputError.includes("for") ? styles.inputErrorLabel : ""
+                }
+              >
+                For
+              </label>
               <input
                 type="text"
+                className={
+                  inputError.includes("for") ? styles.inputErrorInput : ""
+                }
                 value={userPayment.for}
                 name="for"
                 onChange={handleChange}
               />
             </div>
             <div className={styles.inputField}>
-              <label>Amount</label>
-              <input type="number" name="amount" onChange={handleChange} />
+              <label
+                className={
+                  inputError.includes("amount") ? styles.inputErrorLabel : ""
+                }
+              >
+                Amount
+              </label>
+              <input
+                className={
+                  inputError.includes("amount") ? styles.inputErrorInput : ""
+                }
+                type="number"
+                name="amount"
+                onChange={handleChange}
+              />
             </div>
             <div className={styles.inputField}>
-              <label>Category</label>
-              <select name="category" onChange={handleChange}>
+              <label
+                className={
+                  inputError.includes("category") ? styles.inputErrorLabel : ""
+                }
+              >
+                Category
+              </label>
+              <select
+                className={
+                  inputError.includes("category") ? styles.inputErrorInput : ""
+                }
+                name="category"
+                onChange={handleChange}
+              >
                 <option value="entertainment">Entertainment</option>
                 <option value="food">Food</option>
                 <option value="health">Health</option>
@@ -91,9 +156,29 @@ const TransactionBox = (props) => {
               </select>
             </div>
             <div className={styles.inputField}>
-              <label>Date</label>
-              <input type="date" name="date" onChange={handleChange} />
+              <label
+                className={
+                  inputError.includes("date") !== false
+                    ? styles.inputErrorLabel
+                    : ""
+                }
+              >
+                Date
+              </label>
+              <input
+                className={
+                  inputError.includes("date") ? styles.inputErrorInput : ""
+                }
+                type="date"
+                name="date"
+                onChange={handleChange}
+              />
             </div>
+            {inputError.length > 0 ? (
+              <p className={styles.inputError}>Missing Required Fields</p>
+            ) : (
+              ""
+            )}
             <button type="number" onClick={submitPayment}>
               {!submitting ? "Submit Payment" : "Submitting..."}
             </button>
@@ -101,14 +186,23 @@ const TransactionBox = (props) => {
         ) : (
           <>
             <div className={styles.inputField}>
-              <label>Amount</label>
+              <label
+                className={inputError !== false ? styles.inputErrorLabel : ""}
+              >
+                Amount
+              </label>
               <input
+                className={inputError !== false ? styles.inputErrorInput : ""}
                 value={userDeposit}
                 onChange={(e) => setUserDeposit(e.target.value)}
                 type="number"
               />
             </div>
-
+            {inputError !== false ? (
+              <p className={styles.inputError}>Missing Required Fields</p>
+            ) : (
+              ""
+            )}
             <button onClick={submitDeposit}>
               {!submitting ? "Submit Deposit" : "Submitting..."}
             </button>

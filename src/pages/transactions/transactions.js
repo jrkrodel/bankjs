@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 
 function Transactions() {
   const [transactions, setTransactions] = useState(null);
+ 
   const [sortedTransactions, setSortedTransactions] = useState(null);
   const [search, setSearch] = useState({
     for: "",

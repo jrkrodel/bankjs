@@ -29,6 +29,20 @@ label {
   font-family: Raleway;
 }
 
+.inputError {
+  color: #c43333;
+  margin: 0;
+  text-align: center;
+}
+
+.boxForm .inputErrorLabel {
+  color: #c43333;
+}
+
+.boxForm .inputErrorInput {
+  border: 3px solid #c43333;
+}
+
 input {
   color: black;
   border-radius: 5px;
