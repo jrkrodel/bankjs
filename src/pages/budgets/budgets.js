@@ -20,6 +20,7 @@ function Budgets() {
       return (
         <Bubble
           key={ind}
+          link={true}
           title={budget.name}
           size={"med"}
           url={`/budgets/${budget.id}`}

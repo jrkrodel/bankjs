@@ -7,7 +7,7 @@ import {
 } from "../../../firebase/utils/firebaseUtils";
 import styles from "./Budget.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import BudgetGraph from "../../../components/BudgetGraph/BudgetGraph";
 
@@ -76,7 +76,7 @@ function Budget() {
             <h1 className={styles.budgetDisplayHeaderText}>
               <Link to={`/budgets`}>
                 <FontAwesomeIcon
-                  icon={faArrowLeft}
+                  icon={faAngleLeft}
                   className={styles.backArrow}
                 />
               </Link>

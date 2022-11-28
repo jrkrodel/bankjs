@@ -55,6 +55,7 @@ function Home() {
           title={"Budgets"}
           size={"med"}
           url="/budgets"
+          link={true}
           content={
             recentBudget ? "Most Recent Budget: " + recentBudget?.name : "None"
           }
@@ -63,6 +64,7 @@ function Home() {
           title={"Profile"}
           size={"med"}
           url="/profile"
+          link={true}
           content={user.email}
         />
       </div>
@@ -71,6 +73,7 @@ function Home() {
           title={"Transactions"}
           size={"lrg"}
           url="/transactions"
+          link={true}
           content={
             recentTransaction
               ? "Most Recent Transaction - " +
@@ -84,6 +87,7 @@ function Home() {
         <Bubble
           title={"Up/Down"}
           size={"sml"}
+          link={false}
           content={upDown ? `Today: $${upDown}` : "None"}
         />
       </div>
