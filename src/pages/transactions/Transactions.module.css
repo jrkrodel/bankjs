@@ -31,19 +31,44 @@
   margin: 0 0 0.5rem 0;
   color: white;
 }
-.searchInput {
-  width: 45%;
-}
 
 .searchBar {
   width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.7);
+  border-radius: 0px;
+  outline: none;
+  color: white;
+  font-size: 1rem;
+  padding: 0.5rem 0 0.5rem 0;
+  color-scheme: dark;
+}
+
+.searchInput {
+  width: 45%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.7);
+  border-radius: 0px;
+  outline: none;
+  color: white;
+  font-size: 1rem;
+  padding: 0.5rem 0 0.5rem 0;
+  color-scheme: dark;
+}
+
+.searchInput option {
+  color: black;
 }
 
 @media screen and (max-width: 800px) {
   .transactionsContainer {
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: stretch;
     margin-bottom: 2rem;
     justify-content: flex-start;
   }

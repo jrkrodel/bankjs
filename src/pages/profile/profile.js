@@ -9,13 +9,13 @@ import { useUserAuth } from "../../context/userAuthContext";
 
 function Profile() {
   const { user, updateUserDetails } = useUserAuth();
+  const [submitting, setSubmitting] = useState(false);
   const [userData, setUserData] = useState();
   const [isEditing, setIsEditing] = useState(false);
   const [accountDetails, setAccountDetails] = useState(null);
   const [validateDelete, setValidateDelete] = useState(false);
   const { logout, deleteAccount } = useUserAuth();
-
-  console.log(userData);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (userData) {
@@ -53,111 +53,154 @@ function Profile() {
   };
 
   const handleUpdate = async () => {
-    setIsEditing(false);
-    console.log(accountDetails.fName);
-    await updateUserDetails(
+    setSubmitting(true);
+    const update = await updateUserDetails(
       accountDetails.email,
       accountDetails.fName,
       accountDetails.lName
     );
-    await updateProfileDoc(
-      accountDetails.fName,
-      accountDetails.lName,
-      accountDetails.email
-    );
 
+    if (!update) {
+      setIsEditing(false);
+      setError(false);
+    } else {
+      console.log(update);
+      if (update.includes("(auth/email-already-in-use)")) {
+        setError("Email already in use");
+      } else if ("auth/requires-recent-login") {
+        setError(
+          <>
+            Need Reauthorization to update email. <br />
+            Log out and log back in.
+          </>
+        );
+      }
+    }
+
+    setSubmitting(false);
+    console.log(update);
     async function fetchUser() {
       const data = await getUserData();
       setUserData(data);
     }
     fetchUser();
+
+    console.log(userData);
   };
+
+  // console.log(new Date(userData.acountCreated));
+  const cancelEditing = () => {
+    setIsEditing(false);
+    setAccountDetails({
+      email: user.email,
+      fName: user.displayName.split(" ")[0],
+      lName: user.displayName.split(" ")[1],
+    });
+    setError(false);
+  };
+
+  // console.log(user.displayName);
 
   if (userData) {
     return (
-      <div className={styles.profileContainer}>
-        <div className={styles.leftCol}>
-          <h1>User Profile:</h1>
-          {isEditing === false ? (
-            <p>Name: {user.displayName}</p>
-          ) : (
-            <>
-              <label className={styles.profileLabel}>First Name:</label>
-              <input
-                name="fName"
-                value={accountDetails.fName}
-                onChange={handleChange}
-              />
-              <label className={styles.profileLabel}>Last Name:</label>
-              <input
-                name="lName"
-                value={accountDetails.lName}
-                onChange={handleChange}
-              />
-            </>
-          )}
-          {isEditing === false ? (
-            <p>Your Email: {user.email}</p>
-          ) : (
-            <>
-              <label className={styles.profileLabel}>Email:</label>
-              <input
-                value={accountDetails.email}
-                name="email"
-                onChange={handleChange}
-              />
-            </>
-          )}
+      <div>
+        <div className={styles.profileContainer}>
+          <div className={styles.leftCol}>
+            <h1>User Profile:</h1>
+            {isEditing === false ? (
+              <p>Name: {user.displayName}</p>
+            ) : (
+              <>
+                <label className={styles.profileLabel}>First Name:</label>
+                <input
+                  name="fName"
+                  className={styles.profileInput}
+                  value={accountDetails.fName}
+                  onChange={handleChange}
+                />
+                <label className={styles.profileLabel}>Last Name:</label>
+                <input
+                  name="lName"
+                  className={styles.profileInput}
+                  value={accountDetails.lName}
+                  onChange={handleChange}
+                />
+              </>
+            )}
+            {isEditing === false ? (
+              <p>Your Email: {user.email}</p>
+            ) : (
+              <>
+                <label className={styles.profileLabel}>Email:</label>
+                <input
+                  className={styles.profileInput}
+                  value={accountDetails.email}
+                  name="email"
+                  onChange={handleChange}
+                />
+              </>
+            )}
 
-          <p>Your Funds: {userData.funds}</p>
-          <p>Account Created Funds: {userData.funds}</p>
-          {isEditing === false ? (
-            <>
-              <button
-                className={styles.profileButton}
-                onClick={() => setIsEditing(true)}
-              >
-                Edit Account Details
-              </button>
-              <button className={styles.profileButton}>Reset Password</button>
-            </>
-          ) : (
-            <>
-              <button onClick={handleUpdate}>Submit Changes</button>
-              <button
-                className={styles.cancelButton}
-                onClick={() => setIsEditing(false)}
-              >
-                Cancel
-              </button>
-            </>
-          )}
-        </div>
-        <div className={styles.rightCol}>
-          <div className={styles.dataContainer}>
-            <h2>Budgets: {userData.budgets}</h2>
+            {isEditing === false ? (
+              <>
+                <p>Your Funds: {userData?.funds.toFixed(2)}</p>
+                <p>Account Created: {userData?.accountCreated}</p>
+                <button
+                  className={styles.profileButton}
+                  onClick={() => setIsEditing(true)}
+                >
+                  Edit Account Details
+                </button>
+              </>
+            ) : (
+              <>
+                {error ? <p className={styles.error}>{error}</p> : ""}
+                <button className={styles.profileButton} onClick={handleUpdate}>
+                  {!submitting ? "Submit Changes" : "Submitting..."}
+                </button>
+                <button className={styles.cancelButton} onClick={cancelEditing}>
+                  Cancel
+                </button>
+              </>
+            )}
           </div>
+          <div className={styles.rightCol}>
+            <div className={styles.dataContainer}>
+              <h2>Budgets: {userData.budgets}</h2>
+            </div>
 
-          <div className={styles.dataContainer}>
-            <h2>Transactions: {userData.transactions}</h2>
-          </div>
-          <div className={styles.dataContainer}>
-            <h2>
-              Earnings:{" "}
-              <span className={styles.earnings}>${userData.earnings}</span>
-            </h2>
-          </div>
-          <div className={styles.dataContainer}>
-            <h2>
-              Spendings:{" "}
-              <span className={styles.spending}>${userData.spendings}</span>
-            </h2>
-          </div>
-          <div
-            onClick={validateDelete === true ? handleDelete : checkIfSure}
-            className={styles.deleteButton}
-          >
-            {validateDelete ? "Are you sure?" : "Delete Account"}
+            <div className={styles.dataContainer}>
+              <h2>Transactions: {userData.transactions}</h2>
+            </div>
+            <div className={styles.dataContainer}>
+              <h2>
+                Earnings:{" "}
+                <span className={styles.earnings}>
+                  ${userData.earnings.toFixed(2)}
+                </span>
+              </h2>
+            </div>
+            <div className={styles.dataContainer}>
+              <h2>
+                Spendings:{" "}
+                <span className={styles.spending}>
+                  ${userData.spendings.toFixed(2)}
+                </span>
+              </h2>
+            </div>
+            <div
+              onClick={validateDelete === true ? handleDelete : checkIfSure}
+              className={styles.cancelButton}
+            >
+              {validateDelete === true ? (
+                <>
+                  Are you sure?<br></br>
+                  <span>Click to confirm</span>
+                </>
+              ) : (
+                "Delete Account"
+              )}
+            </div>
           </div>
         </div>
       </div>

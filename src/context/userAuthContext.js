@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import { auth, db } from "../firebase/config/firebaseConfig";
 import { doc, setDoc, onSnapshot } from "firebase/firestore";
+import { updateProfileDoc } from "../firebase/utils/firebaseUtils";
 
 const userAuthContext = createContext();
 
@@ -20,6 +21,10 @@ export function UserAuthContextProvider({ children }) {
 
   //Add user data to firestore
   const addUser = async (email, fName, lName) => {
+    const date = new Date();
+    let currentDate =
+      date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+
     try {
       await setDoc(doc(db, "users", auth.currentUser.uid), {
         name: fName + " " + lName,
@@ -29,6 +34,7 @@ export function UserAuthContextProvider({ children }) {
         funds: 0,
         spendings: 0,
         earnings: 0,
+        accountCreated: currentDate,
       });
     } catch (e) {
       console.log(e);
@@ -54,17 +60,20 @@ export function UserAuthContextProvider({ children }) {
   }
 
   async function updateUserDetails(email, fName, lName) {
-    await updateProfile(auth.currentUser, {
-      email: email,
-      displayName: fName.trim() + " " + lName.trim(),
-    });
-    await updateEmail(auth.currentUser, email)
-      .then(() => {
-        console.log("updated");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      await updateEmail(auth.currentUser, email)
+        .then(async () => {
+          await updateProfile(auth.currentUser, {
+            displayName: fName.trim() + " " + lName.trim(),
+          });
+          await updateProfileDoc(fName, lName, email);
+        })
+        .catch((error) => {
+          throw new Error(error);
+        });
+    } catch (error) {
+      return error.message;
+    }
   }
 
   //Log user out

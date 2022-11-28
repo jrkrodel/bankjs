@@ -9,10 +9,13 @@
 html,
 body {
   width: 100%;
-  font-family: Raleway;
-  position: relative;
   overflow-x: hidden;
+  font-family: Raleway;
   background-color: #162636;
+}
+
+body {
+  position: relative;
 }
 
 h1,
@@ -31,6 +34,26 @@ p {
   bottom: 0;
   left: 2rem;
 }
+
+span {
+  font-family: Raleway;
+}
+
+button {
+  font-family: Raleway;
+}
+
+/* Chrome, Safari, Edge, Opera */
+/* input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+} */
+
+/* Firefox */
+/* input[type="number"] {
+  -moz-appearance: textfield;
+} */
 
 /* @media only screen and (max-width: 750px) {
   html {

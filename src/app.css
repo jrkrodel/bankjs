@@ -8,3 +8,15 @@
 button {
   cursor: pointer;
 }
+
+input {
+  font-family: Raleway;
+}
+
+select {
+  font-family: Raleway;
+}
+
+option {
+  font-family: Raleway;
+}

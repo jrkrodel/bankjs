@@ -37,11 +37,17 @@ export async function makeDeposit(deposit) {
   let updatedFunds = currentFunds + d;
   let updatedTransactions = userSnap.data().transactions + 1;
   let updatedEarnings = userSnap.data().earnings + d;
-  await addDoc(transactionRef, {
+
+  const docRef = doc(transactionRef);
+
+  const documentID = docRef.id;
+
+  await setDoc(docRef, {
     date: currentDate,
     amount: deposit,
     type: "deposit",
     updatedAt: time,
+    id: documentID,
   });
   await updateDoc(userRef, {
     funds: updatedFunds,
@@ -65,16 +71,22 @@ export async function makePayment(payment) {
     "transactions"
   );
 
+  const docRef = doc(transactionRef);
+
+  const documentID = docRef.id;
+
   let currentFunds = userSnap.data().funds;
   let newFunds = currentFunds - p;
   let updatedTransactions = userSnap.data().transactions + 1;
   let updatedSpending = userSnap.data().spendings + p;
-  await addDoc(transactionRef, {
+
+  await setDoc(docRef, {
     amount: payment.amount,
     category: payment.category,
     date: payment.date,
     for: payment.for,
     type: payment.type,
+    id: documentID,
     updatedAt: time,
     createdAt: Date.parse(payment.date),
   });
@@ -84,6 +96,47 @@ export async function makePayment(payment) {
     spendings: updatedSpending,
   });
   console.log("Make Payment Ran");
+}
+
+export async function deleteTransaction(id, amount, type) {
+  const userRef = doc(db, "users", auth.currentUser.uid);
+  const userSnap = await getDoc(userRef);
+  const updatedTransactions = userSnap.data().transactions - 1;
+  let updatedFunds;
+  let updatedEarnings;
+  let updatedSpendings;
+
+  if (type === "payment") {
+    updatedFunds = userSnap.data().funds + Number(amount);
+    updatedSpendings = userSnap.data().spendings - Number(amount);
+  } else if (type === "deposit") {
+    updatedFunds = userSnap.data().funds - Number(amount);
+    updatedEarnings = userSnap.data().earnings - Number(amount);
+  }
+
+  const transactionRef = doc(
+    db,
+    "users",
+    auth.currentUser.uid,
+    "transactions",
+    `${id}`
+  );
+
+  await deleteDoc(transactionRef);
+
+  if (type === "payment") {
+    await updateDoc(userRef, {
+      transactions: updatedTransactions,
+      funds: updatedFunds,
+      spendings: updatedSpendings,
+    });
+  } else {
+    await updateDoc(userRef, {
+      transactions: updatedTransactions,
+      funds: updatedFunds,
+      earnings: updatedEarnings,
+    });
+  }
 }
 
 export async function getTransactions() {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./BudgetGraph.module.css";
 import {
   Chart as ChartJS,
@@ -20,73 +20,30 @@ ChartJS.register(
   Legend
 );
 
-export const options = {
-  responsive: true,
-  maintainAspectRatio: false,
-  scales: {
-    y: {
-      grid: {
-        color: "rgba(255,255,255,0.1)",
-      },
-      ticks: {
-        color: "white",
-        beginAtZero: true,
-        font: {
-          size: 11,
-          family: "Raleway",
-        },
-      },
-    },
-    x: {
-      grid: {
-        color: "rgba(255,255,255,0.1)",
-      },
-      ticks: {
-        color: "white",
-        beginAtZero: true,
-        font: {
-          size: 11,
-          family: "Raleway",
-        },
-      },
-    },
-  },
-  plugins: {
-    legend: {
-      position: "top",
-      labels: {
-        color: "white",
-
-        font: {
-          size: 14,
-          family: "Raleway",
-        },
-      },
-    },
-  },
-};
-
-export const data = {
-  datasets: [
-    {
-      label: "Dataset 1",
-      data: [23, 45],
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
-    },
-    {
-      label: "Dataset 2",
-      data: [23, 99],
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
-    },
-  ],
-};
-
 function BudgetGraph({ graphData, compareSpending }) {
   let keys = [];
   let spendingKeys = [];
   let values = [];
   let spendingValues = [];
-  console.log(compareSpending);
+
+  const getWindowSize = () => {
+    const { innerWidth, innerHeight } = window;
+    return { innerWidth, innerHeight };
+  };
+
+  const [windowSize, setWindowSize] = useState(getWindowSize());
+
+  useEffect(() => {
+    function handleWindowResize() {
+      setWindowSize(getWindowSize());
+    }
+
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
 
   Object.keys(graphData).forEach((key) => {
     if (key !== "id" && key !== "name" && key !== "length") {
@@ -107,6 +64,58 @@ function BudgetGraph({ graphData, compareSpending }) {
       spendingValues.push(Number(compareSpending[key]));
     }
   });
+
+  let fontSize;
+  if (windowSize.innerWidth > 420) {
+    fontSize = 11;
+  } else {
+    fontSize = 9;
+  }
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        grid: {
+          color: "rgba(255,255,255,0.1)",
+        },
+        ticks: {
+          color: "white",
+          beginAtZero: true,
+          font: {
+            size: 11,
+            family: "Raleway",
+          },
+        },
+      },
+      x: {
+        grid: {
+          color: "rgba(255,255,255,0.1)",
+        },
+        ticks: {
+          color: "white",
+          beginAtZero: true,
+          font: {
+            size: fontSize,
+            family: "Raleway",
+          },
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        position: "top",
+        labels: {
+          color: "white",
+          font: {
+            size: 14,
+            family: "Raleway",
+          },
+        },
+      },
+    },
+  };
 
   const data = {
     labels: keys,

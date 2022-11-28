@@ -1,9 +1,69 @@
-.container {
+.transactionBoxContainer {
   min-width: 40%;
-  background-color: #1f3a55;
+  background-color: #0c141d;
+  border-radius: 10px;
+  padding-bottom: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+.transactionInput {
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.7);
+  border-radius: 0px;
+  outline: none;
+  color: white;
+  font-size: 1rem;
+  padding: 0.5rem 0 0.5rem 0;
+  color-scheme: dark;
+}
+
+.transactionSelect {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.7);
+  border-radius: 0;
+  outline: none;
+  font-size: 1rem;
+  color: white;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0 0.5rem 0;
+  width: 100%;
+}
+
+.transactionSelect option {
+  color: black;
+}
+
+.transactionInput::placeholder {
+  opacity: 0.4;
+  font-size: 15px;
+  color: white;
+}
+
+.transactionButton {
+  background-color: #305375;
+  border: none;
+  color: white;
+  padding: 1rem;
+  border-radius: 15px;
+  font-size: 16px;
+  border: 1px solid #305375;
+  transition: ease all 0.3s;
+  font-family: Raleway;
+  width: 100%;
+  transition: ease all 0.3s;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.transactionButton:hover {
+  color: #5592cf;
+  background-color: transparent;
 }
 
 .boxNav {
@@ -15,23 +75,26 @@
   padding: 0 2rem 0 2rem;
 }
 
-.boxForm label {
+.transactionLabel {
+  width: 50%;
   color: white;
+  font-family: Raleway;
 }
 
 .container h1 {
   color: white;
 }
 
-label {
+/* label {
   width: 50%;
   color: white;
   font-family: Raleway;
-}
+} */
 
 .inputError {
   color: #c43333;
   margin: 0;
+  font-size: 14px;
   text-align: center;
 }
 
@@ -40,42 +103,47 @@ label {
 }
 
 .boxForm .inputErrorInput {
-  border: 3px solid #c43333;
-}
-
-input {
-  color: black;
-  border-radius: 5px;
-  border: none;
-  width: 50%;
-  color: white;
-  font-family: Raleway;
-}
-
-select {
-  border-radius: 5px;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  width: 100%;
+  border-bottom: 3px solid #c43333;
 }
 
 .inputField {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
+  flex-direction: column;
 }
 
 .boxLink {
   width: 50%;
+  background-color: #080e14;
+  border: none;
+  padding: 1rem;
+  color: white;
+  font-size: 16px;
   margin: 0 0 2rem 0;
-  border-radius: 0;
+  transition: ease all 0.3s;
+}
+
+.boxLink:hover {
+  text-decoration: underline;
+}
+
+.boxLinkLeft {
+  border-top-left-radius: 10px;
+}
+
+.boxLinkRight {
+  border-top-right-radius: 10px;
 }
 
 .boxLinkSelected {
   width: 50%;
   margin: 0 0 2rem 0;
-  border-radius: 0;
-  background-color: #1f3a55;
+  border: none;
+  padding: 1rem;
+  color: white;
+  font-size: 16px;
+  background-color: #0c141d;
 }
 
 @media screen and (max-width: 800px) {

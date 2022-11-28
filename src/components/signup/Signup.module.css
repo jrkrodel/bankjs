@@ -16,22 +16,12 @@
   margin: 0;
 }
 
-input,
-label {
+.signUpContainer label {
   display: block;
   margin-bottom: 0.3rem;
   font-family: Raleway;
+  min-width: 6rem;
   color: black;
-}
-
-input {
-  border: 1px solid black;
-  margin-bottom: 1rem;
-}
-
-input {
-  padding: 0.5rem;
-  width: 100%;
 }
 
 .error {
@@ -44,15 +34,55 @@ input {
   width: 100%;
   justify-content: space-between;
 }
-button {
-  margin: 1rem auto;
+.signUpButton {
   background-color: #305375;
   border: none;
   color: white;
   padding: 1rem;
   border-radius: 15px;
-  width: 100%;
   font-size: 16px;
-  margin-bottom: 1.5rem;
+  border: 1px solid #305375;
+  transition: ease all 0.3s;
   font-family: Raleway;
+  width: 100%;
+  transition: ease all 0.3s;
+}
+
+.signUpContainer .signUpButtonLabel {
+  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.signUpButton:hover {
+  color: #305375;
+  background-color: white;
+}
+
+.leftCol {
+  margin-right: 2rem;
+  /* min-width: 10rem; */
+}
+
+.signUpContainer input {
+  display: block;
+  font-family: Raleway;
+  color: black;
+  border: none;
+  padding: -1rem;
+  width: 100%;
+  margin-bottom: 2rem;
+  border-bottom: 1.5px solid black;
+  font-size: 16px;
+  outline: none;
+}
+
+.signUpContainer input::placeholder {
+  color: black;
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 1100px) {
+  .topRow {
+    flex-direction: column;
+  }
 }

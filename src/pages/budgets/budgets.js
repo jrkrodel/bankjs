@@ -34,7 +34,7 @@ function Budgets() {
         <h1>Your Budgets</h1>
 
         <Link className={styles.budgetLink} to="/budgets/budget-form">
-          <button>Create Budget</button>
+          <button className={styles.budgetHeaderButton}>Create Budget</button>
         </Link>
       </div>
       <div className={styles.budgets}>{budgetBubbles}</div>

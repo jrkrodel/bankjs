@@ -8,7 +8,7 @@ const TransactionSearch = () => {
         <input
           className={styles.searchInput}
           type="text"
-          placeholder="Search"
+          placeholder="Search..."
         />
         <input
           className={styles.searchInput}
@@ -17,7 +17,7 @@ const TransactionSearch = () => {
         />
       </div>
       <div className={styles.formContainer}>
-        <select name="category" className={styles.searchInput}>
+        <select name="category" className={styles.testInput}>
           <option value="" disabled selected>
             Select Category
           </option>

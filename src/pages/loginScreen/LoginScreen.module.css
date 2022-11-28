@@ -1,15 +1,12 @@
 .container {
   width: 80%;
+  height: 100vh;
   max-width: 80rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
   min-height: 40rem;
   margin: 0 auto 0 auto;
-}
-
-.container h1 {
-  font-size: 3rem;
 }
 
 .loginBox {
@@ -32,7 +29,7 @@
 .logo {
   background-color: #305375;
   width: 40%;
-  min-height: 30rem;
+
   min-width: 15rem;
   text-align: center;
   padding-top: 2rem;
@@ -45,8 +42,12 @@
   }
   .logo {
     height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
   }
+
   .form {
     width: 100%;
     margin-bottom: 5rem;

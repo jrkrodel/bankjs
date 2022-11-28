@@ -8,7 +8,7 @@
 }
 
 .loginContainer h1 {
-  font-size: 48px;
+  font-size: 36px;
 }
 
 .loginContainer p {
@@ -23,26 +23,52 @@ form {
   width: 100%;
 }
 
-input,
-label {
+.loginContainer input {
   display: block;
-  margin-bottom: 1rem;
   font-family: Raleway;
   color: black;
-}
-input {
-  padding: 0.5rem;
+  border: none;
+  padding: -1rem;
   width: 100%;
+  margin-bottom: 2rem;
+  border-bottom: 1.5px solid black;
+  font-size: 16px;
+  outline: none;
 }
 
-button {
-  margin: 1rem auto;
+.loginContainer label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-family: Raleway;
+  min-width: 6rem;
+  color: black;
+}
+
+.loginButton {
   background-color: #305375;
   border: none;
   color: white;
   padding: 1rem;
   border-radius: 15px;
   font-size: 16px;
-  margin-bottom: 2rem;
+  border: 1px solid #305375;
+  transition: ease all 0.3s;
   font-family: Raleway;
+  width: 100%;
+  transition: ease all 0.3s;
+}
+
+.loginButton:hover {
+  color: #305375;
+  background-color: white;
+}
+
+.loginContainer input::placeholder {
+  color: black;
+  opacity: 0.6;
+}
+
+.loginButtonLabel {
+  margin-bottom: 0.5rem;
+  margin-top: 1.5rem;
 }

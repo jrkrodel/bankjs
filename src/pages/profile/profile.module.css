@@ -4,12 +4,33 @@
   display: flex;
   justify-content: space-between;
   align-items: stretch;
+  position: relative;
   background-color: #0c141d;
   margin: 3rem auto 0 auto;
   padding: 2rem;
   color: white;
   margin-bottom: 3rem;
   border-radius: 15px;
+}
+
+.profileInput {
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.7);
+  border-radius: 0px;
+  outline: none;
+  color: white;
+  font-size: 1rem;
+  padding: 0.5rem 0 0.5rem 0;
+  color-scheme: dark;
+}
+
+.profileInput::placeholder {
+  opacity: 0.4;
+  font-size: 15px;
+  color: white;
 }
 
 .profileLabel {
@@ -46,21 +67,60 @@
 }
 
 .cancelButton {
+  width: 100%;
   background-color: #c43333;
-  margin: 0;
+  border: 1px solid #c43333;
+  color: white;
+  padding: 1rem;
+  border-radius: 15px;
+  font-size: 1rem;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: ease all 0.3s;
+}
+
+.cancelButton:hover {
+  background-color: transparent;
+  color: #e84141;
 }
 
 .profileButton {
-  margin-bottom: 0.5rem;
+  background-color: #305375;
+  border: none;
+  color: white;
+  padding: 1rem;
+  border-radius: 15px;
+  font-size: 16px;
+  border: 1px solid #305375;
+  transition: ease all 0.3s;
+  font-family: Raleway;
   width: 100%;
+  transition: ease all 0.3s;
+  margin-bottom: 1rem;
+}
+
+.profileButton:hover {
+  color: #5592cf;
+  background-color: transparent;
 }
 
 .earnings {
   color: #3bc42c;
+  font-size: 1.5rem;
+  margin: 0;
 }
 
 .spending {
   color: #c43333;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.error {
+  color: #c43333;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 
 @media screen and (max-width: 1050px) {

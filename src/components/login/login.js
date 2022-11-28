@@ -30,19 +30,26 @@ function Login(props) {
       <h2 className={styles.error}>{error ? error : ""}</h2>
       <form>
         <label>Email:</label>
-        <input value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input
+          value={email}
+          type="email"
+          placeholder="Enter email..."
+          onChange={(e) => setEmail(e.target.value)}
+        />
         <label>Password:</label>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button onClick={loginUser}>
+        <button className={styles.loginButton} onClick={loginUser}>
           {gettingUser ? "Logging in..." : "Login"}{" "}
         </button>
       </form>
-      <p>Don't have an account?</p>
-      <button onClick={props.switchToSignUp}>Create Account</button>
+      <p className={styles.loginButtonLabel}>Don't have an account?</p>
+      <button className={styles.loginButton} onClick={props.switchToSignUp}>
+        Create Account
+      </button>
     </div>
   );
 }

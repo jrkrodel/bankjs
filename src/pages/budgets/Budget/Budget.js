@@ -14,6 +14,7 @@ import BudgetGraph from "../../../components/BudgetGraph/BudgetGraph";
 function Budget() {
   const [budget, setBudget] = useState(null);
   const { id } = useParams();
+  const [validateDelete, setValidateDelete] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [transactions, setTransactions] = useState(null);
 
@@ -63,50 +64,53 @@ function Budget() {
     setDeleteConfirm(true);
   };
 
-  // console.log(transactions);
+  const checkIfSure = () => {
+    setValidateDelete(true);
+  };
 
-  if (deleteConfirm) {
+  if (budget && transactions) {
     return (
-      <div>
-        <h1>Budget Delete</h1>
+      <div className={styles.budgetContainer}>
+        <div className={styles.budgetDisplay}>
+          <div className={styles.budgetDisplayHeader}>
+            <h1 className={styles.budgetDisplayHeaderText}>
+              <Link to={`/budgets`}>
+                <FontAwesomeIcon
+                  icon={faArrowLeft}
+                  className={styles.backArrow}
+                />
+              </Link>
+              {budget.name}
+            </h1>
+            <div className={styles.budgetButtons}>
+              <Link
+                className={styles.editBudget}
+                to={`/budgets/budget-form/${id}`}
+              >
+                Edit Budget
+              </Link>
+              <Link
+                onClick={
+                  validateDelete === true ? () => deleteData(id) : checkIfSure
+                }
+                className={styles.deleteBudget}
+                to={validateDelete === true ? "/budgets" : ""}
+              >
+                {validateDelete === true ? (
+                  <>
+                    Are you sure?<br></br>
+                    <span>Click to confirm</span>
+                  </>
+                ) : (
+                  "Delete Budget"
+                )}
+              </Link>
+            </div>
+          </div>
+          <BudgetGraph graphData={budget} compareSpending={transactions} />
+        </div>
       </div>
     );
-  } else {
-    if (budget && transactions) {
-      return (
-        <div className={styles.budgetContainer}>
-          <div className={styles.budgetDisplay}>
-            <div className={styles.budgetDisplayHeader}>
-              <h1 className={styles.budgetDisplayHeaderText}>
-                <Link to={`/budgets`}>
-                  <FontAwesomeIcon
-                    icon={faArrowLeft}
-                    className={styles.backArrow}
-                  />
-                </Link>
-                {budget.name}
-              </h1>
-              <div className={styles.budgetButtons}>
-                <Link
-                  className={styles.editBudget}
-                  to={`/budgets/budget-form/${id}`}
-                >
-                  Edit Budget
-                </Link>
-                <Link
-                  onClick={() => deleteData(id)}
-                  className={styles.deleteBudget}
-                  to="/budgets"
-                >
-                  Delete Budget
-                </Link>
-              </div>
-            </div>
-            <BudgetGraph graphData={budget} compareSpending={transactions} />
-          </div>
-        </div>
-      );
-    }
   }
 }
 

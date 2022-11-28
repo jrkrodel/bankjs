@@ -36,22 +36,26 @@ const Signup = (props) => {
   };
 
   return (
-    <div className={styles.signUpContainer}>
+    <div id="signUpContainer" className={styles.signUpContainer}>
       <h1>Signup</h1>
       <h2 className={styles.error}>{error ? error : ""}</h2>
       <form>
         <div className={styles.topRow}>
-          <div>
+          <div className={styles.leftCol}>
             <label>First Name:</label>
             <input
+              placeholder="Enter first name..."
+              className={styles.signUpInput}
               name="fName"
               value={signUpForm.fName}
               onChange={handleChange}
             />
           </div>
-          <div>
+          <div className={styles.rightCol}>
             <label>Last Name:</label>
             <input
+              placeholder="Enter last name..."
+              className={styles.signUpInput}
               name="lName"
               value={signUpForm.lName}
               onChange={handleChange}
@@ -59,20 +63,29 @@ const Signup = (props) => {
           </div>
         </div>
         <label>Email:</label>
-        <input value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input
+          placeholder="Enter email..."
+          value={email}
+          type="email"
+          className={styles.signUpInput}
+          onChange={(e) => setEmail(e.target.value)}
+        />
         <label>Password:</label>
         <input
+          className={styles.signUpInput}
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button onClick={signUpUser}>
+        <button className={styles.signUpButton} onClick={signUpUser}>
           {gettingUser ? "Creating Account..." : "Signup"}
         </button>
       </form>
-      <p>Already have an account?</p>
-      <button onClick={props.switchToLogin}>Login Here</button>
+      <p className={styles.signUpButtonLabel}>Already have an account?</p>
+      <button className={styles.signUpButton} onClick={props.switchToLogin}>
+        Login Here
+      </button>
     </div>
   );
 };

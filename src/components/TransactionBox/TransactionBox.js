@@ -31,7 +31,14 @@ const TransactionBox = (props) => {
   };
 
   const submitPayment = async () => {
-    if (
+    if (userPayment.amount < 0) {
+      setInputError("Amount must be great than 0");
+      return;
+    } else if (!userPayment.amount.match(/^(\d*\.{0,1}\d{0,2}$)/)) {
+      setInputError("Amount must have only 2 decimal places");
+      console.log(inputError);
+      return;
+    } else if (
       userPayment.for.trim() !== "" &&
       userPayment.amount.trim() !== "" &&
       userPayment.category !== "" &&
@@ -62,23 +69,40 @@ const TransactionBox = (props) => {
   };
 
   const submitDeposit = async () => {
-    if (userDeposit.trim() !== "") {
+    if (userDeposit.trim() === "") {
+      setInputError("Amount Required");
+      return;
+    }
+    if (userDeposit < 0) {
+      setInputError("Amount must be great than 0");
+      return;
+    }
+    if (!userDeposit.match(/^(\d*\.{0,1}\d{0,2}$)/)) {
+      setInputError("Amount must have only 2 decimal places");
+      return;
+    }
+    if (
+      userDeposit.trim() !== "" &&
+      userDeposit > 0 &&
+      userDeposit.match(/^(\d*\.{0,1}\d{0,2}$)/)
+    ) {
       setSubmitting(true);
       await makeDeposit(userDeposit);
       props.getAllTransactions();
       setSubmitting(false);
-    } else {
-      setInputError("Amount");
+      setUserDeposit("");
     }
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.transactionBoxContainer}>
       <div className={styles.boxNav}>
         <button
           onClick={depositMenu}
           className={
-            selected === "deposit" ? styles.boxLinkSelected : styles.boxLink
+            selected === "deposit"
+              ? `${styles.boxLinkLeft} ${styles.boxLinkSelected}`
+              : `${styles.boxLinkLeft} ${styles.boxLink}`
           }
         >
           Deposit
@@ -86,7 +110,9 @@ const TransactionBox = (props) => {
         <button
           onClick={paymentMenu}
           className={
-            selected === "payment" ? styles.boxLinkSelected : styles.boxLink
+            selected === "payment"
+              ? `${styles.boxLinkRight} ${styles.boxLinkSelected}`
+              : `${styles.boxLinkRight} ${styles.boxLink}`
           }
         >
           Payment
@@ -98,15 +124,20 @@ const TransactionBox = (props) => {
             <div className={styles.inputField}>
               <label
                 className={
-                  inputError.includes("for") ? styles.inputErrorLabel : ""
+                  inputError.includes("for")
+                    ? `${styles.transactionLabel} ${styles.inputErrorLabel}`
+                    : styles.transactionLabel
                 }
               >
-                For
+                Comment
               </label>
               <input
                 type="text"
+                placeholder="Enter comment..."
                 className={
-                  inputError.includes("for") ? styles.inputErrorInput : ""
+                  inputError.includes("for")
+                    ? `${styles.transactionInput} ${styles.inputErrorInput}`
+                    : styles.transactionInput
                 }
                 value={userPayment.for}
                 name="for"
@@ -116,15 +147,20 @@ const TransactionBox = (props) => {
             <div className={styles.inputField}>
               <label
                 className={
-                  inputError.includes("amount") ? styles.inputErrorLabel : ""
+                  inputError.includes("Amount") || inputError.includes("amount")
+                    ? `${styles.transactionLabel} ${styles.inputErrorLabel}`
+                    : styles.transactionLabel
                 }
               >
                 Amount
               </label>
               <input
                 className={
-                  inputError.includes("amount") ? styles.inputErrorInput : ""
+                  inputError.includes("Amount") || inputError.includes("amount")
+                    ? `${styles.transactionInput} ${styles.inputErrorInput}`
+                    : styles.transactionInput
                 }
+                placeholder="Enter amount..."
                 type="number"
                 name="amount"
                 onChange={handleChange}
@@ -133,14 +169,18 @@ const TransactionBox = (props) => {
             <div className={styles.inputField}>
               <label
                 className={
-                  inputError.includes("category") ? styles.inputErrorLabel : ""
+                  inputError.includes("category")
+                    ? `${styles.transactionLabel} ${styles.inputErrorLabel}`
+                    : styles.transactionLabel
                 }
               >
                 Category
               </label>
               <select
                 className={
-                  inputError.includes("category") ? styles.inputErrorInput : ""
+                  inputError.includes("category")
+                    ? `${styles.transactionSelect} ${styles.inputErrorInput}`
+                    : styles.transactionSelect
                 }
                 name="category"
                 onChange={handleChange}
@@ -152,22 +192,24 @@ const TransactionBox = (props) => {
                 <option value="transportation">Transportation</option>
                 <option value="utilities">Utilities</option>
                 <option value="housing">Housing</option>
-                <option value="personal">personal</option>
+                <option value="personal">Personal</option>
               </select>
             </div>
             <div className={styles.inputField}>
               <label
                 className={
                   inputError.includes("date") !== false
-                    ? styles.inputErrorLabel
-                    : ""
+                    ? `${styles.transactionLabel} ${styles.inputErrorLabel}`
+                    : styles.transactionLabel
                 }
               >
                 Date
               </label>
               <input
                 className={
-                  inputError.includes("date") ? styles.inputErrorInput : ""
+                  inputError.includes("date")
+                    ? `${styles.transactionInput} ${styles.inputErrorInput}`
+                    : styles.transactionInput
                 }
                 type="date"
                 name="date"
@@ -175,11 +217,19 @@ const TransactionBox = (props) => {
               />
             </div>
             {inputError.length > 0 ? (
-              <p className={styles.inputError}>Missing Required Fields</p>
+              <p className={styles.inputError}>
+                {inputError.includes("Amount")
+                  ? inputError
+                  : "Missing Required Fields"}
+              </p>
             ) : (
               ""
             )}
-            <button type="number" onClick={submitPayment}>
+            <button
+              className={styles.transactionButton}
+              type="number"
+              onClick={submitPayment}
+            >
               {!submitting ? "Submit Payment" : "Submitting..."}
             </button>
           </>
@@ -187,23 +237,35 @@ const TransactionBox = (props) => {
           <>
             <div className={styles.inputField}>
               <label
-                className={inputError !== false ? styles.inputErrorLabel : ""}
+                className={
+                  inputError
+                    ? `${styles.transactionLabel} ${styles.inputErrorLabel}`
+                    : styles.transactionLabel
+                }
               >
                 Amount
               </label>
               <input
-                className={inputError !== false ? styles.inputErrorInput : ""}
+                placeholder="Enter amount..."
+                className={
+                  inputError
+                    ? `${styles.transactionInput} ${styles.inputErrorInput}`
+                    : styles.transactionInput
+                }
                 value={userDeposit}
                 onChange={(e) => setUserDeposit(e.target.value)}
                 type="number"
               />
             </div>
             {inputError !== false ? (
-              <p className={styles.inputError}>Missing Required Fields</p>
+              <p className={styles.inputError}>{inputError}</p>
             ) : (
               ""
             )}
-            <button onClick={submitDeposit}>
+            <button
+              className={styles.transactionButton}
+              onClick={submitDeposit}
+            >
               {!submitting ? "Submit Deposit" : "Submitting..."}
             </button>
           </>

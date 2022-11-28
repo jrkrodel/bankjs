@@ -2,6 +2,27 @@
   max-height: 10rem; /* or any value */
   overflow-y: auto;
 }
+/* 
+/* width */
+/* .transactionsContainer::-webkit-scrollbar {
+  width: 15px;
+} */
+
+/* Track */
+/* .transactionsContainer::-webkit-scrollbar-track {
+  background-color: rgba(22, 38, 54, 1);
+} */
+
+/* Handle */
+/* .transactionsContainer::-webkit-scrollbar-thumb {
+  background: rgba(48, 83, 117, 0.5);
+  border-radius: 10px;
+} */
+
+/* Handle on hover */
+/* .transactionsContainer::-webkit-scrollbar-thumb:hover {
+  background: rgba(48, 83, 117, 1);
+} */
 
 /* .transactionsContainer::-webkit-scrollbar {
   display: none;
@@ -9,6 +30,7 @@
 
 .transaction {
   width: 100%;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -18,15 +40,43 @@
   padding: 1rem;
 }
 
+.deleteTransactionButton {
+  width: 100%;
+  background-color: #c43333;
+  border: 1px solid #c43333;
+  color: white;
+  padding: 1rem;
+  border-radius: 15px;
+  font-size: 1rem;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: ease all 0.3s;
+}
+
+.deleteTransactionButton:hover {
+  background-color: transparent;
+  color: #e84141;
+}
+
+.cap {
+  text-transform: capitalize;
+}
+
 .transactionEven {
   width: 100%;
   display: flex;
   align-items: center;
+  cursor: pointer;
   justify-content: space-between;
   color: white;
   font-size: 0.5rem;
   background-color: #1b2f42;
   padding: 1rem;
+}
+
+.transactionEven:hover {
+  background-color: #305375;
 }
 
 .transactionEven h1 {
@@ -37,6 +87,14 @@
 .transaction h1 {
   margin: 0;
   font-size: 1rem;
+}
+
+.transaction:hover {
+  background-color: #305375;
+}
+
+hr {
+  margin-top: 10px;
 }
 
 .rightSide {
@@ -93,16 +151,15 @@
   .rightSide {
     flex-direction: row-reverse;
     align-items: flex-start;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
     width: 100%;
   }
   .leftSide {
     flex-direction: column-reverse;
     align-items: flex-start;
-    /* margin-left: 1rem; */
     width: 100%;
   }
   .leftSide h1 {
-    margin: 0;
+    margin-bottom: 0.3rem;
   }
 }

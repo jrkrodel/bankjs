@@ -21,12 +21,26 @@
   margin: 0;
 }
 
-.budgetHeader button {
+.budgetHeaderButton {
   width: 20%;
   margin: 0;
   font-size: 1.2rem;
   min-width: 11rem;
   cursor: pointer;
+  background-color: #305375;
+  border: none;
+  color: white;
+  padding: 1rem;
+  border-radius: 15px;
+  border: 1px solid #305375;
+  transition: ease all 0.3s;
+  font-family: Raleway;
+  transition: ease all 0.3s;
+}
+
+.budgetHeaderButton:hover {
+  color: #5592cf;
+  background-color: transparent;
 }
 
 .budgetLink {
