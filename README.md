@@ -1,6 +1,6 @@
 # BankJS
 
-BankJS is a simulated experience that allows a user to create an account, complete transactions, create budgets, and edit and delete these. It is a fully responsive application created with React, ChartJS, a little bit of MUI for the styling of a modal, and Firebase to handle all the data.
+BankJS is a simulated experience that allows a user to create an account, complete transactions, create budgets, and edit and delete these. It is a fully responsive application created with React, ChartJS (react-chartjs-2), a little bit of MUI for the styling of a modal, and Firebase to handle all the data.
 
 ## Transactions
 
