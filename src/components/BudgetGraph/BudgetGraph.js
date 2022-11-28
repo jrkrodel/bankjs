@@ -123,7 +123,7 @@ function BudgetGraph({ graphData, compareSpending }) {
       {
         label: "Your Budget",
         data: values,
-        backgroundColor: ["#162636"],
+        backgroundColor: ["#305375"],
         borderWidth: 0.5,
       },
       {
