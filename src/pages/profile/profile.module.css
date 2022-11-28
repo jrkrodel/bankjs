@@ -1,6 +1,7 @@
 .profileContainer {
   width: 60%;
   max-width: 60rem;
+  min-width: 18rem;
   display: flex;
   justify-content: space-between;
   align-items: stretch;
@@ -35,6 +36,14 @@
 
 .profileLabel {
   color: white;
+}
+
+.profileContainer .leftCol .profileInputError {
+  border-color: #c43333;
+}
+
+.profileContainer .leftCol .profileLabelError {
+  color: #c43333;
 }
 
 .leftCol {

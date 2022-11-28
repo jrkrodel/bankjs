@@ -47,14 +47,14 @@ export function UserAuthContextProvider({ children }) {
   }
 
   //Signup and authenticate new user
-  async function signUp(email, password, signUpForm) {
+  async function signUp(email, password, fName, lName) {
     await createUserWithEmailAndPassword(auth, email, password).then(
       (result) => {
         updateProfile(auth.currentUser, {
-          displayName: signUpForm.fName.trim() + " " + signUpForm.lName.trim(),
+          displayName: fName.trim() + " " + lName.trim(),
         });
         //After user is created, add user data to firestore
-        addUser(email, signUpForm.fName, signUpForm.lName);
+        addUser(email, fName, lName);
       }
     );
   }

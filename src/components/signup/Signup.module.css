@@ -24,6 +24,14 @@
   color: black;
 }
 
+.signUpContainer .signUpInputError {
+  border-bottom: 2px solid #c43333;
+}
+
+.signUpContainer .signUpLabelError {
+  color: #c43333;
+}
+
 .error {
   font-size: 14px;
   color: #c43333;

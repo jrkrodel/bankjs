@@ -3,7 +3,6 @@ import styles from "./Profile.module.css";
 import {
   getUserData,
   deleteAccountData,
-  updateProfileDoc,
 } from "../../firebase/utils/firebaseUtils";
 import { useUserAuth } from "../../context/userAuthContext";
 
@@ -16,6 +15,7 @@ function Profile() {
   const [validateDelete, setValidateDelete] = useState(false);
   const { logout, deleteAccount } = useUserAuth();
   const [error, setError] = useState(null);
+  const [missing, setMissing] = useState([]);
 
   useEffect(() => {
     if (userData) {
@@ -25,7 +25,8 @@ function Profile() {
         lName: user.displayName.split(" ")[1],
       });
     }
-  }, [userData]);
+  }, [userData, user]);
+  console.log(accountDetails);
 
   useEffect(() => {
     async function fetchUser() {
@@ -52,40 +53,60 @@ function Profile() {
     });
   };
 
+  console.log(accountDetails);
+
   const handleUpdate = async () => {
-    setSubmitting(true);
-    const update = await updateUserDetails(
-      accountDetails.email,
-      accountDetails.fName,
-      accountDetails.lName
-    );
+    setMissing([]);
+    if (
+      accountDetails.email !== "" &&
+      accountDetails.fName !== "" &&
+      accountDetails.lName !== ""
+    ) {
+      setSubmitting(true);
+      const update = await updateUserDetails(
+        accountDetails.email,
+        accountDetails.fName,
+        accountDetails.lName
+      );
 
-    if (!update) {
-      setIsEditing(false);
-      setError(false);
-    } else {
-      console.log(update);
-      if (update.includes("(auth/email-already-in-use)")) {
-        setError("Email already in use");
-      } else if ("auth/requires-recent-login") {
-        setError(
-          <>
-            Need Reauthorization to update email. <br />
-            Log out and log back in.
-          </>
-        );
+      if (!update) {
+        setIsEditing(false);
+        setError(false);
+      } else {
+        console.log(update);
+        if (update.includes("(auth/email-already-in-use)")) {
+          setError("Email already in use");
+          setMissing("email");
+        } else if ("auth/requires-recent-login") {
+          setError(
+            <>
+              Need Reauthorization to update email. <br />
+              Log out and log back in.
+            </>
+          );
+          setMissing("email");
+        }
       }
-    }
 
-    setSubmitting(false);
-    console.log(update);
-    async function fetchUser() {
-      const data = await getUserData();
-      setUserData(data);
-    }
-    fetchUser();
+      setSubmitting(false);
+      async function fetchUser() {
+        const data = await getUserData();
+        console.log(data);
+        setUserData(data);
+      }
+      fetchUser();
+    } else {
+      const missingInputs = [];
+      Object.keys(accountDetails).forEach((key) => {
+        if (accountDetails[key].trim() === "") {
+          console.log(key);
+          missingInputs.push(key);
+        }
+      });
 
-    console.log(userData);
+      setMissing(missingInputs);
+      setError("Missing required inputs");
+    }
   };
 
   // console.log(new Date(userData.acountCreated));
@@ -99,8 +120,6 @@ function Profile() {
     setError(false);
   };
 
-  // console.log(user.displayName);
-
   if (userData) {
     return (
       <div>
@@ -111,17 +130,41 @@ function Profile() {
               <p>Name: {user.displayName}</p>
             ) : (
               <>
-                <label className={styles.profileLabel}>First Name:</label>
+                <label
+                  className={
+                    missing.includes("fName")
+                      ? styles.profileLabelError
+                      : styles.profileLabel
+                  }
+                >
+                  First Name:
+                </label>
                 <input
                   name="fName"
-                  className={styles.profileInput}
+                  className={
+                    missing.includes("fName")
+                      ? `${styles.profileInput} ${styles.profileInputError}`
+                      : styles.profileInput
+                  }
                   value={accountDetails.fName}
                   onChange={handleChange}
                 />
-                <label className={styles.profileLabel}>Last Name:</label>
+                <label
+                  className={
+                    missing.includes("lName")
+                      ? styles.profileLabelError
+                      : styles.profileLabel
+                  }
+                >
+                  Last Name:
+                </label>
                 <input
                   name="lName"
-                  className={styles.profileInput}
+                  className={
+                    missing.includes("lName")
+                      ? `${styles.profileInput} ${styles.profileInputError}`
+                      : styles.profileInput
+                  }
                   value={accountDetails.lName}
                   onChange={handleChange}
                 />
@@ -131,10 +174,22 @@ function Profile() {
               <p>Your Email: {user.email}</p>
             ) : (
               <>
-                <label className={styles.profileLabel}>Email:</label>
+                <label
+                  className={
+                    missing.includes("email")
+                      ? styles.profileLabelError
+                      : styles.profileLabel
+                  }
+                >
+                  Email:
+                </label>
                 <input
-                  className={styles.profileInput}
                   value={accountDetails.email}
+                  className={
+                    missing.includes("email")
+                      ? `${styles.profileInput} ${styles.profileInputError}`
+                      : styles.profileInput
+                  }
                   name="email"
                   onChange={handleChange}
                 />

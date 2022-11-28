@@ -45,6 +45,13 @@ const TransactionBox = (props) => {
       userPayment.date !== "" &&
       userPayment.type !== ""
     ) {
+      setUserPayment({
+        for: "",
+        amount: "",
+        category: "entertainment",
+        date: "",
+        type: "payment",
+      });
       setInputError([]);
       setSubmitting(true);
       await makePayment(userPayment);
@@ -52,18 +59,11 @@ const TransactionBox = (props) => {
       setSubmitting(false);
     } else {
       const errors = [];
-      if (userPayment.for.trim() === "") {
-        errors.push("for");
-      }
-      if (userPayment.amount === "") {
-        errors.push("amount");
-      }
-      if (userPayment.category === "") {
-        errors.push("category");
-      }
-      if (userPayment.date === "") {
-        errors.push("date");
-      }
+      Object.keys(userPayment).forEach((key) => {
+        if (userPayment[key].trim() === "") {
+          errors.push(key);
+        }
+      });
       setInputError([...errors]);
     }
   };
@@ -163,6 +163,7 @@ const TransactionBox = (props) => {
                 placeholder="Enter amount..."
                 type="number"
                 name="amount"
+                value={userPayment.amount}
                 onChange={handleChange}
               />
             </div>
@@ -183,6 +184,7 @@ const TransactionBox = (props) => {
                     : styles.transactionSelect
                 }
                 name="category"
+                value={userPayment.category}
                 onChange={handleChange}
               >
                 <option value="entertainment">Entertainment</option>
@@ -212,6 +214,7 @@ const TransactionBox = (props) => {
                     : styles.transactionInput
                 }
                 type="date"
+                value={userPayment.date}
                 name="date"
                 onChange={handleChange}
               />
