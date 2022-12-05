@@ -53,9 +53,9 @@ export async function makeDeposit(deposit) {
     id: documentID,
   });
   await updateDoc(userRef, {
-    funds: updatedFunds,
+    funds: Number(updatedFunds.toFixed(2)),
     transactions: updatedTransactions,
-    earnings: updatedEarnings,
+    earnings: Number(updatedEarnings.toFixed(2)),
   });
   console.log("Make Deposit Ran");
 }
@@ -141,14 +141,14 @@ export async function deleteTransaction(id, amount, type) {
   if (type === "payment") {
     await updateDoc(userRef, {
       transactions: updatedTransactions,
-      funds: updatedFunds,
-      spendings: updatedSpendings,
+      funds: Number(updatedFunds.toFixed(2)),
+      spendings: Number(updatedSpendings.toFixed(2)),
     });
   } else {
     await updateDoc(userRef, {
       transactions: updatedTransactions,
-      funds: updatedFunds,
-      earnings: updatedEarnings,
+      funds: Number(updatedFunds.toFixed(2)),
+      earnings: Number(updatedEarnings.toFixed(2)),
     });
   }
 }
