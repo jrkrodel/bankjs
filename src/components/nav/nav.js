@@ -109,7 +109,7 @@ function Nav(props) {
       <div
         className={nav ? styles.mobileNavBarClosed : styles.mobileNavBarOpen}
       >
-        <p className={styles.fundsMobile}>Funds: {props.funds}</p>
+        <p className={styles.fundsMobile}>Funds: ${props.funds}</p>
         <Link onClick={openNav} className={styles.navLinkMobile} to="/home">
           <FontAwesomeIcon className={styles.icon} icon={faHouse} />
           Home
