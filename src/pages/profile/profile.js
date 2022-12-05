@@ -13,6 +13,7 @@ function Profile() {
   const [isEditing, setIsEditing] = useState(false);
   const [accountDetails, setAccountDetails] = useState(null);
   const [validateDelete, setValidateDelete] = useState(false);
+  const [accountCreated, setAccountCreated] = useState(null);
   const [deleteMessage, setDeleteMessage] = useState(
     <>
       Are you sure?<br></br>
@@ -30,6 +31,23 @@ function Profile() {
         lName: user.displayName.split(" ")[1],
       });
     }
+    let displayDate = new Date(userData?.accountCreated);
+    let convertedDate = displayDate.toLocaleString("default", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    });
+    // let convertedDate =
+    //   (displayDate.getMonth() > 8
+    //     ? displayDate.getMonth() + 1
+    //     : "0" + (displayDate.getMonth() + 1)) +
+    //   "/" +
+    //   (displayDate.getDate() > 9
+    //     ? displayDate.getDate()
+    //     : "0" + displayDate.getDate()) +
+    //   "/" +
+    //   displayDate.getFullYear();
+    setAccountCreated(convertedDate);
   }, [userData, user]);
 
   useEffect(() => {
@@ -206,7 +224,7 @@ function Profile() {
             {isEditing === false ? (
               <>
                 <p>Your Funds: ${userData?.funds.toFixed(2)}</p>
-                <p>Account Created: {userData?.accountCreated}</p>
+                <p>Created: {accountCreated}</p>
                 <button
                   className={styles.profileButton}
                   onClick={() => setIsEditing(true)}
