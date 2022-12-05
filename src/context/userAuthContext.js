@@ -97,8 +97,10 @@ export function UserAuthContextProvider({ children }) {
 
   if (user) {
     const unsub = onSnapshot(doc(db, "users", auth.currentUser.uid), (doc) => {
-      setUserFunds(doc.data().funds.toFixed(2));
-      console.log("Snapshot Ran");
+      if (doc.data()) {
+        setUserFunds(doc.data().funds.toFixed(2));
+        console.log("Snapshot Ran");
+      }
     });
   }
 
