@@ -28,11 +28,24 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
   });
 
   const [deleteConfirm, setDeleteConfirm] = useState(false);
+  const [deleteMessage, setDeleteMessage] = useState(
+    <>
+      Are you sure?<br></br>
+      <span>Click to confirm</span>
+    </>
+  );
 
   const handleDelete = async (id, amount, type) => {
+    setDeleteMessage("Deleting...");
     await deleteTransaction(id, amount, type);
+    await getAllTransactions();
+    setDeleteMessage(
+      <>
+        Are you sure?<br></br>
+        <span>Click to confirm</span>
+      </>
+    );
     handleClose();
-    getAllTransactions();
   };
 
   const handleOpen = (comment, date, category, amount, type, id) => {
@@ -60,8 +73,10 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
   };
 
   const handleClose = () => {
-    setOpen(false);
-    setDeleteConfirm(false);
+    if (deleteMessage !== "Deleting...") {
+      setOpen(false);
+      setDeleteConfirm(false);
+    }
   };
 
   const style = {
@@ -208,14 +223,7 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
             }}
             className={styles.deleteTransactionButton}
           >
-            {deleteConfirm === false ? (
-              "Delete Transaction"
-            ) : (
-              <>
-                Are you sure?<br></br>
-                <span>Click to confirm</span>
-              </>
-            )}
+            {deleteConfirm === false ? "Delete Transaction" : deleteMessage}
           </button>
         </Box>
       </Modal>
