@@ -1,7 +1,6 @@
 import {
   doc,
   setDoc,
-  addDoc,
   getDoc,
   updateDoc,
   deleteDoc,
@@ -30,7 +29,11 @@ export async function makeDeposit(deposit) {
   const d = Number(deposit);
   let date = new Date();
   let currentDate =
-    date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    (date.getMonth() > 8 ? date.getMonth() + 1 : "0" + (date.getMonth() + 1)) +
+    "/" +
+    (date.getDate() > 9 ? date.getDate() : "0" + date.getDate()) +
+    "/" +
+    date.getFullYear();
   let time =
     date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
   let currentFunds = userSnap.data().funds;
@@ -61,6 +64,17 @@ export async function makePayment(payment) {
   const userRef = doc(db, "users", auth.currentUser.uid);
   const userSnap = await getDoc(userRef);
   const p = Number(payment.amount);
+  let displayDate = new Date(payment.date);
+  let convertedDate =
+    (displayDate.getMonth() > 8
+      ? displayDate.getMonth() + 1
+      : "0" + (displayDate.getMonth() + 1)) +
+    "/" +
+    (displayDate.getDate() > 9
+      ? displayDate.getDate()
+      : "0" + displayDate.getDate()) +
+    "/" +
+    displayDate.getFullYear();
   let date = new Date();
   let time =
     date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
@@ -83,7 +97,7 @@ export async function makePayment(payment) {
   await setDoc(docRef, {
     amount: payment.amount,
     category: payment.category,
-    date: payment.date,
+    date: convertedDate,
     for: payment.for,
     type: payment.type,
     id: documentID,
