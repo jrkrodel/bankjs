@@ -27,7 +27,6 @@ const TransactionBox = (props) => {
 
   const handleChange = (event) => {
     setUserPayment({ ...userPayment, [event.target.name]: event.target.value });
-    console.log(userPayment);
   };
 
   const submitPayment = async () => {
@@ -36,7 +35,7 @@ const TransactionBox = (props) => {
       return;
     } else if (!userPayment.amount.match(/^(\d*\.{0,1}\d{0,2}$)/)) {
       setInputError("Amount must have only 2 decimal places");
-      console.log(inputError);
+
       return;
     } else if (
       userPayment.for.trim() !== "" &&

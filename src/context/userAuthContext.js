@@ -86,7 +86,7 @@ export function UserAuthContextProvider({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
       setUser(currentuser);
-      console.log("Set User Ran");
+
       setAuthRunning(false);
     });
 
@@ -99,7 +99,6 @@ export function UserAuthContextProvider({ children }) {
     const unsub = onSnapshot(doc(db, "users", auth.currentUser.uid), (doc) => {
       if (doc.data()) {
         setUserFunds(doc.data().funds.toFixed(2));
-        console.log("Snapshot Ran");
       }
     });
   }

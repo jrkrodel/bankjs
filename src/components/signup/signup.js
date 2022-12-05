@@ -18,14 +18,12 @@ const Signup = (props) => {
 
   const handleChange = (event) => {
     setSignUpForm({ ...signUpForm, [event.target.name]: event.target.value });
-    console.log(signUpForm);
   };
 
   const signUpUser = async (e) => {
     e.preventDefault();
     setMissing([]);
-    console.log(signUpForm.fName);
-    console.log(signUpForm.fName.trim());
+
     if (
       signUpForm.fName.trim() !== "" &&
       signUpForm.lName.trim() !== "" &&

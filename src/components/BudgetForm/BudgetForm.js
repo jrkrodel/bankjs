@@ -67,7 +67,6 @@ function BudgetForm() {
     setInvalidFields("");
     Object.keys(budget).forEach((key) => {
       if (key !== "id" && key !== "name" && key !== "length") {
-        console.log(budget[key]);
         if (budget[key] < 0) {
           setInputError("Values must be great than 0");
           errors.push(key);
@@ -103,7 +102,6 @@ function BudgetForm() {
     setInvalidFields("");
     Object.keys(budget).forEach((key) => {
       if (key !== "id" && key !== "name" && key !== "length") {
-        console.log(budget[key]);
         if (budget[key] < 0) {
           setInputError("Values must be great than 0");
           errors.push(key);

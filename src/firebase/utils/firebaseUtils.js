@@ -17,7 +17,6 @@ export async function getUserData() {
 }
 
 export async function makeDeposit(deposit) {
-  console.log("make deposit ran");
   const userRef = doc(db, "users", auth.currentUser.uid);
   const transactionRef = collection(
     db,
@@ -57,7 +56,6 @@ export async function makeDeposit(deposit) {
     transactions: updatedTransactions,
     earnings: Number(updatedEarnings.toFixed(2)),
   });
-  console.log("Make Deposit Ran");
 }
 
 export async function makePayment(payment) {
@@ -109,7 +107,6 @@ export async function makePayment(payment) {
     transactions: updatedTransactions,
     spendings: updatedSpending,
   });
-  console.log("Make Payment Ran");
 }
 
 export async function deleteTransaction(id, amount, type) {
@@ -154,7 +151,6 @@ export async function deleteTransaction(id, amount, type) {
 }
 
 export async function getTransactions() {
-  console.log("Get Transactions Ran");
   const transactions = [];
   const querySnapshot = await getDocs(
     collection(db, "users", auth.currentUser.uid, "transactions")
@@ -206,7 +202,6 @@ export async function getTransactionsForGraph(length) {
   } else {
     console.log("No such document!");
   }
-  console.log("Get Transactions For Graph Ran");
 }
 
 export async function createBudget(budget) {
@@ -251,7 +246,6 @@ export async function getBudgets() {
   } else {
     console.log("No such document!");
   }
-  console.log("Get Budget Ran");
 }
 
 export async function getBudgetData(id) {
@@ -267,7 +261,6 @@ export async function getBudgetData(id) {
   if (budgetSnap.exists()) {
     return budget.budget;
   }
-  console.log("Get Budget Data Ran");
 }
 
 export async function deleteBudget(id) {
@@ -308,7 +301,6 @@ export async function deleteAccountData() {
 }
 
 export async function updateProfileDoc(fName, lName, email) {
-  console.log(fName);
   const userRef = doc(db, "users", auth.currentUser.uid);
 
   await updateDoc(userRef, {

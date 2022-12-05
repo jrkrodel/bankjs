@@ -27,10 +27,8 @@ function Home() {
 
     today.forEach((transaction) => {
       if (transaction.type === "payment") {
-        console.log(transaction.amount);
         spendings += Number(transaction.amount);
       } else if (transaction.type === "deposit") {
-        console.log(transaction.amount);
         earnings += Number(transaction.amount);
       }
     });

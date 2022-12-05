@@ -31,7 +31,6 @@ function Profile() {
       });
     }
   }, [userData, user]);
-  console.log(accountDetails);
 
   useEffect(() => {
     async function fetchUser() {
@@ -67,8 +66,6 @@ function Profile() {
     });
   };
 
-  console.log(accountDetails);
-
   const handleUpdate = async () => {
     setMissing([]);
     if (
@@ -87,7 +84,6 @@ function Profile() {
         setIsEditing(false);
         setError(false);
       } else {
-        console.log(update);
         if (update.includes("(auth/email-already-in-use)")) {
           setError("Email already in use");
           setMissing("email");
@@ -105,7 +101,6 @@ function Profile() {
       setSubmitting(false);
       async function fetchUser() {
         const data = await getUserData();
-        console.log(data);
         setUserData(data);
       }
       fetchUser();
@@ -113,7 +108,6 @@ function Profile() {
       const missingInputs = [];
       Object.keys(accountDetails).forEach((key) => {
         if (accountDetails[key].trim() === "") {
-          console.log(key);
           missingInputs.push(key);
         }
       });
@@ -123,7 +117,6 @@ function Profile() {
     }
   };
 
-  // console.log(new Date(userData.acountCreated));
   const cancelEditing = () => {
     setIsEditing(false);
     setAccountDetails({

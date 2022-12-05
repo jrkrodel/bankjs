@@ -19,7 +19,6 @@ function Login(props) {
       setGettingUser(false);
       navigate("home");
     } catch (err) {
-      console.log(err);
       setGettingUser(false);
       setError("Incorrect Username or Password");
     }

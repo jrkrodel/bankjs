@@ -16,6 +16,8 @@ A user can click on any transaction to open up a modal that displays the informa
 
 A user can go to the budget screen to create or find a list of their created budgets. They can click on the create budget button to be brought to a form where they can begin. The user is required to give the budget a name and can choose the budget length. They can then fill out the budget form, entering an amount for the same set of categories that they can select for payments. By leaving a category at 0, it will not display on the generated budget. After filling out a budget to their liking, the user can click the create budget button.
 
+The chosen length of the budget will control which payments show up next to the budgeted spending. So, if the budget length is two weeks, then payments from the last two weeks will show next to the budgeted spending amounts.
+
 After creating the budget, the user is brought to the budget details screen. Here they see a graph that displays their budgets and can find buttons to edit or delete it. The user can select edit budget to be brought again to form where they can edit their budget information, such as name, changing category amounts, and updating the length of the budget.
 
 Again, all of this functionality utilizes Firebase to store, update, retrieve, and delete budget data.

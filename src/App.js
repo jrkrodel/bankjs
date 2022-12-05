@@ -14,7 +14,7 @@ function App() {
   const { user } = useUserAuth();
   const { userFunds } = useUserAuth();
   const { authRunning } = useUserAuth();
-  console.log(authRunning);
+
   if (authRunning === false) {
     return (
       <BrowserRouter>

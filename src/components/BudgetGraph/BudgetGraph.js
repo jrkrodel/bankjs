@@ -49,8 +49,7 @@ function BudgetGraph({ graphData, compareSpending }) {
     if (key !== "id" && key !== "name" && key !== "length") {
       if (graphData[key] !== 0 && graphData[key] !== "0") {
         keys.push(key.charAt(0).toUpperCase() + key.slice(1));
-        values.push(parseFloat(graphData[key]).toFixed(2));
-        console.log(values);
+        values.push(graphData[key]).toFixed(2);
       } else {
         return null;
       }
@@ -62,8 +61,7 @@ function BudgetGraph({ graphData, compareSpending }) {
   Object.keys(compareSpending).forEach((key) => {
     if (keys.includes(key.charAt(0).toUpperCase() + key.slice(1))) {
       spendingKeys.push(key.charAt(0).toUpperCase() + key.slice(1));
-      spendingValues.push(parseFloat(compareSpending[key]).toFixed(2));
-      console.log(spendingValues);
+      spendingValues.push(compareSpending[key]).toFixed(2);
     }
   });
 

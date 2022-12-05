@@ -15,7 +15,6 @@ import {
 import { useState } from "react";
 
 function Nav(props) {
-  console.log(useLocation());
   const { pathname } = useLocation();
   let { logout } = useUserAuth();
   const [nav, setNav] = useState(true);
