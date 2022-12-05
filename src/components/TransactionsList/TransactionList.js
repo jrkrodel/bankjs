@@ -29,8 +29,8 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
 
   const [deleteConfirm, setDeleteConfirm] = useState(false);
 
-  const handleDelete = (id, amount, type) => {
-    deleteTransaction(id, amount, type);
+  const handleDelete = async (id, amount, type) => {
+    await deleteTransaction(id, amount, type);
     handleClose();
     getAllTransactions();
   };
