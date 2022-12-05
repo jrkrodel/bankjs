@@ -7,13 +7,18 @@ import {
 import { useUserAuth } from "../../context/userAuthContext";
 
 function Profile() {
-  const { user, updateUserDetails } = useUserAuth();
+  const { user, updateUserDetails, logout, deleteAccount } = useUserAuth();
   const [submitting, setSubmitting] = useState(false);
   const [userData, setUserData] = useState();
   const [isEditing, setIsEditing] = useState(false);
   const [accountDetails, setAccountDetails] = useState(null);
   const [validateDelete, setValidateDelete] = useState(false);
-  const { logout, deleteAccount } = useUserAuth();
+  const [deleteMessage, setDeleteMessage] = useState(
+    <>
+      Are you sure?<br></br>
+      <span>Click to confirm</span>
+    </>
+  );
   const [error, setError] = useState(null);
   const [missing, setMissing] = useState([]);
 
@@ -41,9 +46,18 @@ function Profile() {
   };
 
   const handleDelete = async () => {
+    setDeleteMessage("Deleting...");
     await deleteAccountData();
-    deleteAccount();
-    logout();
+    await deleteAccount();
+    setDeleteMessage(
+      <>
+        Are you sure?<br></br>
+        <span>Click to confirm</span>
+      </>
+    );
+    if (deleteMessage !== "Deleting...") {
+      logout();
+    }
   };
 
   const handleChange = (event) => {
@@ -247,14 +261,7 @@ function Profile() {
               onClick={validateDelete === true ? handleDelete : checkIfSure}
               className={styles.cancelButton}
             >
-              {validateDelete === true ? (
-                <>
-                  Are you sure?<br></br>
-                  <span>Click to confirm</span>
-                </>
-              ) : (
-                "Delete Account"
-              )}
+              {validateDelete === true ? deleteMessage : "Delete Account"}
             </div>
           </div>
         </div>

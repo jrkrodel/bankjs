@@ -8,14 +8,21 @@ import {
 import styles from "./Budget.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import BudgetGraph from "../../../components/BudgetGraph/BudgetGraph";
 
 function Budget() {
   const [budget, setBudget] = useState(null);
+  const navigate = useNavigate();
   const { id } = useParams();
   const [validateDelete, setValidateDelete] = useState(false);
   const [transactions, setTransactions] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(
+    <>
+      Are you sure?<br></br>
+      <span>Click to confirm</span>
+    </>
+  );
 
   useEffect(() => {
     getBudgetData(id).then((data) => {
@@ -59,7 +66,17 @@ function Budget() {
   }, [budget]);
 
   const deleteData = async (id) => {
+    setIsDeleting("Deleting...");
     await deleteBudget(id);
+    setIsDeleting(
+      <>
+        Are you sure?<br></br>
+        <span>Click to confirm</span>
+      </>
+    );
+    if (isDeleting !== "Deleting...") {
+      navigate("/budgets");
+    }
   };
 
   const checkIfSure = () => {
@@ -87,22 +104,14 @@ function Budget() {
               >
                 Edit Budget
               </Link>
-              <Link
+              <button
                 onClick={
                   validateDelete === true ? () => deleteData(id) : checkIfSure
                 }
                 className={styles.deleteBudget}
-                to={validateDelete === true ? "/budgets" : ""}
               >
-                {validateDelete === true ? (
-                  <>
-                    Are you sure?<br></br>
-                    <span>Click to confirm</span>
-                  </>
-                ) : (
-                  "Delete Budget"
-                )}
-              </Link>
+                {validateDelete === true ? isDeleting : "Delete Budget"}
+              </button>
             </div>
           </div>
           <BudgetGraph graphData={budget} compareSpending={transactions} />
