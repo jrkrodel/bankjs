@@ -93,7 +93,7 @@ function Nav(props) {
             Profile
           </p>
         </Link>
-        <p className={styles.funds}>Funds: {props.funds}</p>
+        <p className={styles.funds}>Funds: ${props.funds}</p>
         <Link className={styles.navLink} onClick={logoutUser} to="/">
           <FontAwesomeIcon className={styles.icon} icon={faRightFromBracket} />
           Logout

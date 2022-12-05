@@ -15,7 +15,6 @@ function Budget() {
   const [budget, setBudget] = useState(null);
   const { id } = useParams();
   const [validateDelete, setValidateDelete] = useState(false);
-  const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [transactions, setTransactions] = useState(null);
 
   useEffect(() => {
@@ -61,7 +60,6 @@ function Budget() {
 
   const deleteData = async (id) => {
     await deleteBudget(id);
-    setDeleteConfirm(true);
   };
 
   const checkIfSure = () => {

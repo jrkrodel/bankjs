@@ -198,7 +198,7 @@ function Profile() {
 
             {isEditing === false ? (
               <>
-                <p>Your Funds: {userData?.funds.toFixed(2)}</p>
+                <p>Your Funds: ${userData?.funds.toFixed(2)}</p>
                 <p>Account Created: {userData?.accountCreated}</p>
                 <button
                   className={styles.profileButton}

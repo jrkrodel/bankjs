@@ -41,7 +41,7 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
         comment: comment,
         date: date,
         category: category,
-        amount: amount,
+        amount: Number(amount).toFixed(2),
         type: type,
         id: id,
       });
@@ -50,7 +50,7 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
         comment: "",
         date: date,
         category: "",
-        amount: amount,
+        amount: Number(amount).toFixed(2),
         type: type,
         id: id,
       });
@@ -91,7 +91,7 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
                 transaction.for,
                 transaction.date,
                 transaction.category,
-                transaction.amount,
+                Number(transaction.amount).toFixed(2),
                 transaction.type,
                 transaction.id
               )
@@ -102,7 +102,7 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
               <h1>{transaction.date}</h1>
             </div>
             <div className={styles.rightSide}>
-              <h1>${transaction.amount}</h1>
+              <h1>${Number(transaction.amount).toFixed(2)}</h1>
               <h1 className={styles.deposit}>
                 {transaction.type.toUpperCase()}
               </h1>
@@ -139,7 +139,7 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
                 transaction.for,
                 transaction.date,
                 transaction.category,
-                transaction.amount,
+                Number(transaction.amount).toFixed(2),
                 transaction.type,
                 transaction.id
               )
@@ -155,7 +155,7 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
               </h1>
             </div>
             <div className={styles.rightSide}>
-              <h1>${transaction.amount}</h1>
+              <h1>${Number(transaction.amount).toFixed(2)}</h1>
               <h1 className={styles.payment}>
                 {transaction.type.toUpperCase()}
               </h1>

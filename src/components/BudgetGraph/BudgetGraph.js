@@ -49,7 +49,8 @@ function BudgetGraph({ graphData, compareSpending }) {
     if (key !== "id" && key !== "name" && key !== "length") {
       if (graphData[key] !== 0 && graphData[key] !== "0") {
         keys.push(key.charAt(0).toUpperCase() + key.slice(1));
-        values.push(Number(graphData[key]));
+        values.push(parseFloat(graphData[key]).toFixed(2));
+        console.log(values);
       } else {
         return null;
       }
@@ -61,7 +62,8 @@ function BudgetGraph({ graphData, compareSpending }) {
   Object.keys(compareSpending).forEach((key) => {
     if (keys.includes(key.charAt(0).toUpperCase() + key.slice(1))) {
       spendingKeys.push(key.charAt(0).toUpperCase() + key.slice(1));
-      spendingValues.push(Number(compareSpending[key]));
+      spendingValues.push(parseFloat(compareSpending[key]).toFixed(2));
+      console.log(spendingValues);
     }
   });
 
@@ -104,6 +106,24 @@ function BudgetGraph({ graphData, compareSpending }) {
       },
     },
     plugins: {
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            let label = context.dataset.label || "";
+
+            if (label) {
+              label += ": ";
+            }
+            if (context.parsed.y !== null) {
+              label += new Intl.NumberFormat("en-US", {
+                style: "currency",
+                currency: "USD",
+              }).format(context.parsed.y);
+            }
+            return label;
+          },
+        },
+      },
       legend: {
         position: "top",
         labels: {

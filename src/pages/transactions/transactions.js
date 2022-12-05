@@ -1,10 +1,7 @@
 import TransactionBox from "../../components/TransactionBox/TransactionBox";
 import TransactionList from "../../components/TransactionsList/TransactionList";
 import styles from "./Transactions.module.css";
-import {
-  getTransactions,
-  deleteTransaction,
-} from "../../firebase/utils/firebaseUtils";
+import { getTransactions } from "../../firebase/utils/firebaseUtils";
 import { useState, useEffect } from "react";
 
 function Transactions() {
@@ -167,7 +164,6 @@ function Transactions() {
               <option value="low">Low</option>
             </select>
           </div>
-          {/* <button onClick={getAllTransactions}>Get Transactions</button> */}
           <h3 className={styles.results}>Results:</h3>
         </div>
         <TransactionList
