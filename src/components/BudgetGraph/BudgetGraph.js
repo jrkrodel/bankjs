@@ -47,7 +47,11 @@ function BudgetGraph({ graphData, compareSpending }) {
 
   Object.keys(graphData).forEach((key) => {
     if (key !== "id" && key !== "name" && key !== "length") {
-      if (graphData[key] !== 0 && graphData[key] !== "0") {
+      if (
+        graphData[key] !== 0 &&
+        graphData[key] !== "0" &&
+        graphData[key] !== ""
+      ) {
         keys.push(key.charAt(0).toUpperCase() + key.slice(1));
         values.push(graphData[key]).toFixed(2);
       } else {

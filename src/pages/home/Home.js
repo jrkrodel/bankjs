@@ -55,7 +55,7 @@ function Home() {
           url="/budgets"
           link={true}
           content={
-            recentBudget ? "Most Recent Budget: " + recentBudget?.name : "None"
+            recentBudget ? "Most Recent Budget - " + recentBudget?.name : "None"
           }
         />
         <Bubble

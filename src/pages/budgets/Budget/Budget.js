@@ -17,7 +17,8 @@ function Budget() {
   const { id } = useParams();
   const [validateDelete, setValidateDelete] = useState(false);
   const [transactions, setTransactions] = useState(null);
-  const [isDeleting, setIsDeleting] = useState(
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteMessage, setDeleteMessage] = useState(
     <>
       Are you sure?<br></br>
       <span>Click to confirm</span>
@@ -66,16 +67,20 @@ function Budget() {
   }, [budget]);
 
   const deleteData = async (id) => {
-    setIsDeleting("Deleting...");
-    await deleteBudget(id);
-    setIsDeleting(
-      <>
-        Are you sure?<br></br>
-        <span>Click to confirm</span>
-      </>
-    );
-    if (isDeleting !== "Deleting...") {
-      navigate("/budgets");
+    if (isDeleting === false) {
+      setIsDeleting(true);
+      setDeleteMessage("Deleting...");
+      await deleteBudget(id);
+      setDeleteMessage(
+        <>
+          Are you sure?<br></br>
+          <span>Click to confirm</span>
+        </>
+      );
+      if (deleteMessage !== "Deleting...") {
+        setIsDeleting(false);
+        navigate("/budgets");
+      }
     }
   };
 
@@ -110,7 +115,7 @@ function Budget() {
                 }
                 className={styles.deleteBudget}
               >
-                {validateDelete === true ? isDeleting : "Delete Budget"}
+                {validateDelete === true ? deleteMessage : "Delete Budget"}
               </button>
             </div>
           </div>

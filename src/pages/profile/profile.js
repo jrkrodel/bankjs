@@ -14,6 +14,7 @@ function Profile() {
   const [accountDetails, setAccountDetails] = useState(null);
   const [validateDelete, setValidateDelete] = useState(false);
   const [accountCreated, setAccountCreated] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [deleteMessage, setDeleteMessage] = useState(
     <>
       Are you sure?<br></br>
@@ -37,16 +38,7 @@ function Profile() {
       day: "numeric",
       year: "numeric",
     });
-    // let convertedDate =
-    //   (displayDate.getMonth() > 8
-    //     ? displayDate.getMonth() + 1
-    //     : "0" + (displayDate.getMonth() + 1)) +
-    //   "/" +
-    //   (displayDate.getDate() > 9
-    //     ? displayDate.getDate()
-    //     : "0" + displayDate.getDate()) +
-    //   "/" +
-    //   displayDate.getFullYear();
+
     setAccountCreated(convertedDate);
   }, [userData, user]);
 
@@ -63,17 +55,21 @@ function Profile() {
   };
 
   const handleDelete = async () => {
-    setDeleteMessage("Deleting...");
-    await deleteAccountData();
-    await deleteAccount();
-    setDeleteMessage(
-      <>
-        Are you sure?<br></br>
-        <span>Click to confirm</span>
-      </>
-    );
-    if (deleteMessage !== "Deleting...") {
-      logout();
+    if (isDeleting === false) {
+      setIsDeleting(true);
+      setDeleteMessage("Deleting...");
+      await deleteAccountData();
+      await deleteAccount();
+      setDeleteMessage(
+        <>
+          Are you sure?<br></br>
+          <span>Click to confirm</span>
+        </>
+      );
+      if (deleteMessage !== "Deleting...") {
+        setIsDeleting(false);
+        logout();
+      }
     }
   };
 

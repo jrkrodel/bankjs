@@ -34,18 +34,25 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
       <span>Click to confirm</span>
     </>
   );
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleDelete = async (id, amount, type) => {
-    setDeleteMessage("Deleting...");
-    await deleteTransaction(id, amount, type);
-    await getAllTransactions();
-    setDeleteMessage(
-      <>
-        Are you sure?<br></br>
-        <span>Click to confirm</span>
-      </>
-    );
-    handleClose();
+    if (isDeleting === false) {
+      setIsDeleting(true);
+      setDeleteMessage("Deleting...");
+      await deleteTransaction(id, amount, type);
+      await getAllTransactions();
+      setDeleteMessage(
+        <>
+          Are you sure?<br></br>
+          <span>Click to confirm</span>
+        </>
+      );
+      if (deleteMessage !== "Deleting...") {
+        handleClose();
+        setIsDeleting(false);
+      }
+    }
   };
 
   const handleOpen = (comment, date, category, amount, type, id) => {
@@ -95,6 +102,9 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
 
   if (transactions) {
     allTransactions = transactions.map((transaction, index) => {
+      const dateElements = transaction.date.split("-");
+      const convertedDate =
+        dateElements[1] + "/" + dateElements[2] + "/" + dateElements[0];
       if (transaction.type === "deposit") {
         return (
           <div
@@ -104,7 +114,7 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
             onClick={() =>
               handleOpen(
                 transaction.for,
-                transaction.date,
+                convertedDate,
                 transaction.category,
                 Number(transaction.amount).toFixed(2),
                 transaction.type,
@@ -114,7 +124,7 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
             key={index}
           >
             <div className={styles.leftSide}>
-              <h1>{transaction.date}</h1>
+              <h1>{convertedDate}</h1>
             </div>
             <div className={styles.rightSide}>
               <h1>${Number(transaction.amount).toFixed(2)}</h1>
@@ -152,7 +162,7 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
             onClick={() =>
               handleOpen(
                 transaction.for,
-                transaction.date,
+                convertedDate,
                 transaction.category,
                 Number(transaction.amount).toFixed(2),
                 transaction.type,
@@ -161,7 +171,7 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
             }
           >
             <div className={styles.leftSide}>
-              <h1>{transaction.date}</h1>
+              <h1>{convertedDate}</h1>
 
               <h1>
                 <FontAwesomeIcon className={styles.icon} icon={icon} />
@@ -196,17 +206,18 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
             {transactionInfo.date}
           </h2>
           {transactionInfo.category !== "" ? (
-            <p className={styles.cap}>
-              Category: {transactionInfo.category} <hr></hr>
-            </p>
+            <div className={styles.transactionInfoBox}>
+              <p className={styles.cap}>Category: {transactionInfo.category}</p>
+              <hr></hr>
+            </div>
           ) : (
             ""
           )}
           {transactionInfo.comment !== "" ? (
-            <p>
-              Comment: {transactionInfo.comment}
+            <div className={styles.transactionInfoBox}>
+              <p className={styles.cap}>Comment: {transactionInfo.comment}</p>
               <hr></hr>
-            </p>
+            </div>
           ) : (
             ""
           )}
