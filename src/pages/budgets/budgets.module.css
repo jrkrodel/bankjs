@@ -55,11 +55,13 @@
   align-items: center;
   flex-wrap: wrap;
   margin-top: 2rem;
+  padding-left: 2rem;
 }
 
 @media screen and (max-width: 850px) {
   .budgets {
     justify-content: center;
+    padding: 0;
   }
   .budgetHeader {
     flex-direction: column;

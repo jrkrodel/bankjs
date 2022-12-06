@@ -130,7 +130,7 @@ function Transactions() {
               name="for"
               className={styles.searchBar}
               type="text"
-              placeholder="Search"
+              placeholder="Search..."
             />
           </div>
           <div className={styles.formContainer}>

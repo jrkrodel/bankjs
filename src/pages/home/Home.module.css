@@ -10,12 +10,14 @@
 .bubbleRow {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding-left: 2rem;
 }
 
 @media screen and (max-width: 850px) {
   .bubbleRow {
     flex-direction: column;
     width: 100%;
+    padding: 0;
   }
 }
