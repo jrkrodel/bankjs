@@ -17,12 +17,10 @@ function Home() {
     let spendings = 0;
     let earnings = 0;
     let date = new Date();
-    let currentDate =
-      date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
     const data = await getTransactions();
     setRecentTransactions(data[0]);
     const today = data.filter((transaction) => {
-      return transaction.date === currentDate;
+      return transaction.date === date.toISOString().split("T")[0];
     });
 
     today.forEach((transaction) => {

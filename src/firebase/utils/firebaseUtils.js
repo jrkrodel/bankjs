@@ -27,8 +27,9 @@ export async function makeDeposit(deposit) {
   const userSnap = await getDoc(userRef);
   const d = Number(deposit);
   let date = new Date();
-  let currentDate =
-    date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+  console.log(date);
+  let currentDate = date.toISOString().split("T")[0];
+  console.log(currentDate);
   let time =
     date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
   let currentFunds = userSnap.data().funds;
