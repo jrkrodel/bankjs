@@ -29,7 +29,8 @@
 }
 
 .inputForm {
-  margin-right: 2rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
   width: 100%;
 }
 
@@ -144,6 +145,7 @@
 
   .inputForm {
     margin-right: 0;
+    margin-left: 0;
   }
 }
 
