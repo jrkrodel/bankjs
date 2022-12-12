@@ -12,13 +12,14 @@ import {
   faRightFromBracket,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Nav(props) {
   const { pathname } = useLocation();
   let { logout } = useUserAuth();
   const [nav, setNav] = useState(true);
   const [activeLink, setActiveLink] = useState(pathname.split("/")[1]);
+
   const logoutUser = async (e) => {
     e.preventDefault();
     try {
@@ -32,16 +33,16 @@ function Nav(props) {
     setNav(!nav);
   };
 
+  useEffect(() => {
+    setActiveLink(pathname.split("/")[1]);
+  }, [pathname]);
+
   return (
     <div>
       <nav className={styles.nav}>
         <h1 className={styles.logo}>BankJS</h1>
 
-        <Link
-          className={styles.navLink}
-          onClick={() => setActiveLink("home")}
-          to="/home"
-        >
+        <Link className={styles.navLink} to="/home">
           <FontAwesomeIcon className={styles.icon} icon={faHouse} />
           <p
             className={activeLink === "home" ? styles.active : styles.inactive}
@@ -49,11 +50,7 @@ function Nav(props) {
             Home
           </p>
         </Link>
-        <Link
-          className={styles.navLink}
-          onClick={() => setActiveLink("transactions")}
-          to="/transactions"
-        >
+        <Link className={styles.navLink} to="/transactions">
           <FontAwesomeIcon className={styles.icon} icon={faCreditCard} />
           <p
             className={
@@ -63,11 +60,7 @@ function Nav(props) {
             Transactions
           </p>
         </Link>
-        <Link
-          className={styles.navLink}
-          onClick={() => setActiveLink("budgets")}
-          to="/budgets"
-        >
+        <Link className={styles.navLink} to="/budgets">
           <FontAwesomeIcon className={styles.icon} icon={faChartSimple} />
           <p
             className={
@@ -77,11 +70,7 @@ function Nav(props) {
             Budgets
           </p>
         </Link>
-        <Link
-          className={styles.navLink}
-          onClick={() => setActiveLink("profile")}
-          to="/profile"
-        >
+        <Link className={styles.navLink} to="/profile">
           <FontAwesomeIcon className={styles.icon} icon={faUser} />
           <p
             className={
