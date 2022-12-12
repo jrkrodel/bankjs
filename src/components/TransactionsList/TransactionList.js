@@ -205,6 +205,7 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
             <br></br>
             {transactionInfo.date}
           </h2>
+          <br></br>
           {transactionInfo.category !== "" ? (
             <div className={styles.transactionInfoBox}>
               <p className={styles.cap}>Category: {transactionInfo.category}</p>
@@ -224,6 +225,7 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
             ""
           )}
           <p>Amount: ${transactionInfo.amount}</p>
+          <br></br>
           <button
             onClick={() => {
               deleteConfirm === true
