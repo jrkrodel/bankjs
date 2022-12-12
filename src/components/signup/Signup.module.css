@@ -93,4 +93,7 @@
   .topRow {
     flex-direction: column;
   }
+  .leftCol {
+    margin-right: 0;
+  }
 }
