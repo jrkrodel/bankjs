@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import styles from "./nav.module.css";
+import styles from "./Nav.module.css";
 import { useUserAuth } from "../../context/userAuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 

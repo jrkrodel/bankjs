@@ -64,6 +64,10 @@
   margin-bottom: 0;
 }
 
+.noBottomMargin {
+  margin-bottom: 0;
+}
+
 .transactionInfoBox {
   margin-bottom: 1rem;
   overflow-wrap: break-word;

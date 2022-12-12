@@ -215,7 +215,9 @@ const TransactionList = ({ transactions, getAllTransactions }) => {
           )}
           {transactionInfo.comment !== "" ? (
             <div className={styles.transactionInfoBox}>
-              <p className={styles.cap}>Comment: {transactionInfo.comment}</p>
+              <p className={styles.noBottomMargin}>
+                Comment: {transactionInfo.comment}
+              </p>
               <hr></hr>
             </div>
           ) : (
