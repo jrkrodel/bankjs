@@ -23,7 +23,6 @@ function Nav(props) {
     e.preventDefault();
     try {
       await logout();
-      props.hideNav();
     } catch (err) {
       console.log(err);
     }
