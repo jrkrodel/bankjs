@@ -18,7 +18,7 @@ function Nav(props) {
   const { pathname } = useLocation();
   let { logout } = useUserAuth();
   const [nav, setNav] = useState(true);
-  const [activeLink, setActiveLink] = useState(pathname.split("/")[1]);
+  const [activeLink, setActiveLink] = useState("home");
 
   const logoutUser = async (e) => {
     e.preventDefault();
